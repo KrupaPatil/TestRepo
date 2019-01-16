@@ -1,0 +1,40 @@
+<div class="place-wrapper">
+
+  <agm-map [latitude]="place.venue.location.lat"
+                   [longitude]="place.venue.location.lng"
+                   [styles]="style"
+                   [zoomControl]="false"
+                   [streetViewControl]="false"
+                   [zoom]="17">
+    <agm-marker [latitude]="place.venue.location.lat"
+                            [iconUrl]="'./assets/images/pin.svg'"
+                            [longitude]="place.venue.location.lng"></agm-marker>
+  </agm-map>
+
+  <div class="info-wrapper">
+    <div class="location-wrapper">
+      <ion-icon name="pin"></ion-icon>
+      <a class="location" [href]="sanitizedUrl" target="_system">
+        <div><b>{{ place.venue.name }}</b></div>
+        <div>{{ place.venue.location.address }}</div>
+        <div>{{ place.venue.location.city }}</div>
+        <div>{{ place.venue.location.country }}</div>
+      </a>
+    </div>
+    <div class="distance-wrapper">
+      <ion-icon name="navigate"></ion-icon>
+      <div>{{ place.venue.location.distance | meterToMiles | number : '.2-2' }}mi away</div>
+    </div>
+    <div class="rating-wrapper" *ngIf="place.venue.rating">
+      <ion-icon name="star"></ion-icon>
+      <div><span>{{ place.venue.rating }}</span>/10</div>
+    </div>
+  <button class="call-wrapper" *ngIf="!!place.venue.contact.phone" (click)="place.call()">
+    <ion-icon name="call"></ion-icon>
+    <div>{{ place.venue.contact.phone }}</div>
+  </button>
+  </div>
+
+
+</div>
+

@@ -1,0 +1,13 @@
+<div class="market-price-wrapper">
+  <div class="price-type">{{ type }}</div>
+  <div class="per-cigar-wrapper">
+    <div class="per-cigar-icon"></div>
+    <div class="per-cigar">{{ [cigarPrices?.SinglePriceMin, cigarPrices?.SinglePriceMax] | priceRange }}</div>
+  </div>
+  <div class="per-humidor-wrapper">
+    <div class="per-humidor-icon"></div>
+    <div class="per-humidor">
+      {{ [cigarPrices?.BoxPriceMin, cigarPrices?.BoxPriceMax, boxQuantityMin, boxQuantityMax] | priceRange }}
+    </div>
+  </div>
+</div>

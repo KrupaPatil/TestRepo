@@ -1,0 +1,119 @@
+.measurement-history-wrapper {
+  height: calc(100% - 150px);
+  margin: 70px 20px 80px;
+  text-align: center;
+  font-size: 16px;
+
+  .heading {
+    margin: 50px 0 80px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
+
+  .filter-date-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin: 0 auto;
+    ion-item {
+      width: 45%;
+      padding: 0 10px;
+      border: 1px solid #dd423e;
+      border-radius: 5px;
+      box-sizing: content-box;
+      color: #dd423e;
+    }
+
+    .label {
+      color: #dd423e;
+    }
+  }
+
+  .button-wrapper {
+    margin-top: 20px;
+    button {
+      border: 1px solid $cs-red;
+      border-radius: 5px;
+      background: $cs-red;
+      color: #fff;
+      &.active, &:hover {
+        background: #fff;
+        color: $cs-red;
+      }
+    }
+  }
+
+  .chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .measurement-history-wrapper {
+    height: calc(100% - 160px);
+    margin: 80px 20px;
+
+    .heading {
+      display: none;
+    }
+
+    .filter-date-wrapper {
+      width: auto;
+      ion-item {
+        width: 42%;
+        padding: 0 5px;
+      }
+
+      .label, .datetime {
+        margin: 0;
+        padding: 11px 2px;
+        font-size: 14px;
+      }
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-between;
+      button {
+        width: 47%;
+        padding: 0 10px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .measurement-history-wrapper {
+    margin: 80px 10px;
+
+    .filter-date-wrapper {
+      width: auto;
+      ion-item {
+        width: 46%;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .measurement-history-wrapper {
+    margin: 80px 10px;
+
+    .filter-date-wrapper {
+      flex-direction: column;
+      align-items: center;
+      ion-item {
+        width: 60%;
+      }
+
+      ion-item:first-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

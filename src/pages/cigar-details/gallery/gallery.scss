@@ -1,0 +1,10 @@
+.gallery-wrapper {
+  height: calc(100% - 121px);
+  margin: 61px 0 60px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 100%;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="reviews-wrapper">
+  <p class="page-name">Reviews</p>
+  <ion-segment [(ngModel)]="comments" (ionChange)="toggleReviewsToDisplay()">
+    <ion-segment-button value="with-comment">
+      With Comment
+    </ion-segment-button>
+    <ion-segment-button value="all">
+      All Reviews
+    </ion-segment-button>
+  </ion-segment>
+  <div class="inner-wrapper">
+    <div class="review" *ngFor="let review of reviews">
+      <div class="date-stars">
+        <div class="date">
+          Reviewed on {{ review.CreatedOn | date }}
+        </div>
+        <rating-stars [rating]="review.Rating"
+                      [size]="15">
+        </rating-stars>
+      </div>
+      <div class="text" *ngIf="review.Comment?.length" [innerHTML]="review.Comment | nl2br"></div>
+    </div>
+    <div *ngIf="total === reviews.length" (click)="loadMore()" tappable>
+      Load More
+    </div>
+  </div>
+</div>
+

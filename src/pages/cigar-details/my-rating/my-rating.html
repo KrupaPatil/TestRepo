@@ -1,0 +1,66 @@
+<div class="my-rating-wrapper">
+  <p class="sub-heading">Rate cigar:</p>
+  <form #form="ngForm" (ngSubmit)="submit(form.valid)" novalidate>
+    <ion-list>
+      <ion-item>
+        <p>Draw</p>
+        <rating-stars [rating]="review.DrawRating"
+                      [size]="25"
+                      [rateable]="true"
+                      [starColor]="'yellow'"
+                      (onRate)="review.DrawRating = $event">
+        </rating-stars>
+      </ion-item>
+      <ion-item>
+        <p>Appearance</p>
+        <rating-stars [rating]="review.AppearanceRating"
+                      [size]="25"
+                      [rateable]="true"
+                      [starColor]="'yellow'"
+                      (onRate)="review.AppearanceRating = $event">
+        </rating-stars>
+      </ion-item>
+      <ion-item>
+        <p>Burn</p>
+        <rating-stars [rating]="review.BurnRating"
+                      [size]="25"
+                      [rateable]="true"
+                      [starColor]="'yellow'"
+                      (onRate)="review.BurnRating = $event">
+        </rating-stars>
+      </ion-item>
+      <ion-item>
+        <p>Aroma</p>
+        <rating-stars [rating]="review.AromaRating"
+                      [size]="25"
+                      [rateable]="true"
+                      [starColor]="'yellow'"
+                      (onRate)="review.AromaRating = $event">
+        </rating-stars>
+      </ion-item>
+      <ion-item>
+        <p>Taste</p>
+        <rating-stars [rating]="review.TasteRating"
+                      [size]="25"
+                      [rateable]="true"
+                      [starColor]="'yellow'"
+                      (onRate)="review.TasteRating = $event">
+        </rating-stars>
+      </ion-item>
+      <ion-item>
+        <ion-textarea placeholder="Write your review..."
+                      autocorrect="on"
+                      autocomplete="on"
+                      name="review-comment"
+                      #reviewComment="ngModel"
+                      [(ngModel)]="review.Comment">
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button class="save" type="submit" ion-button>
+          Save
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+</div>

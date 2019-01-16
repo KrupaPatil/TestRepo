@@ -1,0 +1,74 @@
+.custom-cigar-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 100px 20px 0;
+
+  div.page-name {
+    margin: 0 0 120px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
+
+  ion-textarea {
+    height: 100px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #969696;
+    color: #000;
+
+    textarea {
+      height: calc(100% - 26px);
+      resize: none;
+    }
+  }
+
+  ion-textarea textarea::placeholder {
+    color: #cecece;
+  }
+
+  ion-textarea.ng-invalid.ng-dirty, ion-textarea.ng-invalid.ng-touched {
+    border-bottom-color: #f53d3d;
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    button, .delete {
+      width: 45%;
+    }
+
+    .button-inner {
+      white-space: normal;
+      line-height: initial;
+    }
+  }
+
+  .delete {
+    height: 55px;
+    line-height: 55px;
+    margin: 30px 0 25px;
+    font-size: 16px;
+    color: #fff;
+    background: #B02C2C;
+    border-radius: 4px;
+    &:hover {
+      background: #B02C2C;
+      color: #fff;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .custom-cigar-wrapper {
+    .page-name {
+      display: none;
+    }
+
+    .button-wrapper {
+      button.full-width {
+        width: 100%;
+      }
+    }
+  }
+}

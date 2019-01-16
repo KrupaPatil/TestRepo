@@ -1,0 +1,37 @@
+<div class="scan-cigar-wrapper" *ngIf="!showSplashScreen">
+  <div class="edit-tag">
+    <div class="info-icon"></div>
+    <p>Please, make sure the Cigar we detected is correct.
+      Otherwise, edit the rectangle to match your cigar.
+    </p>
+  </div>
+  <div class="canvas-wrapper">
+    <canvas id="cigar-canvas" [attr.width]="canvasWidth" [attr.height]="canvasHeight"></canvas>
+  </div>
+  <div class="edit-buttons" [style.width]="canvasWidth">
+    <button class="cancel-button" (click)="back()"></button>
+    <button class="upload-button" (click)="submit()"></button>
+  </div>
+</div>
+
+<div class="splash-screen" *ngIf="showSplashScreen">
+  <div class="info-wrapper">
+    <div class="image-wrapper">
+      <img src="assets/images/puffing-cigar.gif" alt="">
+      <div class="message">Identifying Your Cigar...</div>
+    </div>
+  </div>
+</div>
+
+<div class="desktop-option-wrapper" style="display: none">
+  <div class="option-button-wrapper">
+    <button>
+      <div class="take-icon"></div>
+      <p>Take Picture</p>
+    </button>
+    <button class="upload-picture">
+      <div class="upload-icon"></div>
+      <p>Upload Picture</p>
+    </button>
+  </div>
+</div>

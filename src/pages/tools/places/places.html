@@ -1,0 +1,67 @@
+<div class="places-wrapper" [ngClass]="{'showing-list': viewType == 'list'}">
+  <div class="button-wrapper" [ngClass]="{'showing-list': viewType == 'list'}">
+    <ion-segment [(ngModel)]="viewType">
+      <ion-segment-button value="map">
+        Map
+      </ion-segment-button>
+      <ion-segment-button value="list">
+        List
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="map-wrapper">
+    <ion-list [hidden]="viewType != 'map'">
+      <agm-map *ngIf="latitude && longitude"
+                       [latitude]="latitude"
+                       [longitude]="longitude"
+                       [zoomControl]="false"
+                       [streetViewControl]="false"
+                       (centerChange)="centerChanged($event)"
+                       (zoomChange)="zoomChanged($event)"
+                       (idle)="idle()"
+                       [styles]="style"
+                       [zoom]="zoom">
+        <agm-marker *ngFor="let place of places"
+                                [latitude]="place.venue.location.lat"
+                                [longitude]="place.venue.location.lng"
+                                [iconUrl]="'./assets/images/pin.svg'"
+                                (markerClick)="openPlaceDetails(place)"></agm-marker>
+      </agm-map>
+    </ion-list>
+
+    <ion-list class="list-wrapper" [hidden]="viewType != 'list'">
+      <ion-item *ngFor="let place of places">
+        <div class="place" (click)="openPlaceDetails(place)" tappable>
+          <div class="place-name">{{ place.venue.name }}</div>
+          <div class="place-address" *ngIf="place.venue.location.address">
+            {{ place.venue.location.address }}, {{ place.venue.location.city }}
+          </div>
+          <div class="distance-wrapper">
+            <ion-icon name="pin"></ion-icon>
+          <div class="distance">
+            {{ place.venue.location.distance | meterToMiles | number : '.2-2' }}mi away
+          </div>
+        </div>
+        </div>
+          <button class="call" *ngIf="!!place.venue.contact.phone" tappable
+                  (click)="place.call()">
+            <ion-icon name="call"></ion-icon>
+          </button>
+      </ion-item>
+    </ion-list>
+
+    <div class="map-buttons" [hidden]="viewType != 'map'">
+      <div class="reload-button" (click)="reload()" tappable>
+        <ion-icon name="refresh"></ion-icon>
+      </div>
+      <div class="refresh-button" (click)="refresh()" tappable>
+        <ion-icon name="locate"></ion-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ion-content class="page-level page-level-2" pageLevel="2">
+  <router-outlet></router-outlet>
+</ion-content>

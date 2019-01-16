@@ -1,0 +1,35 @@
+<div class="notifications-wrapper">
+  <div class="button-wrapper">
+    <button class="delete-all" ion-button (click)="deleteAll()">Delete all</button>
+  </div>
+  <ion-list class="notifications-list" *ngIf="notifications && notifications.length">
+    <ion-item-sliding *ngFor="let notification of unreadNotifications; let i = index">
+      <ion-item class="notification" (click)="navigateTo(notification, i)" tappable>
+        <div class="inner-wrapper">
+          <div class="text" [ngClass]="{ 'bold': !notification.IsRead }" [innerHTML]="notification.Message"></div>
+          <div class="time">{{ notification.CreatedOn | date: 'hh:mm a MM/dd/yyyy' }}</div>
+        </div>
+        <img *ngIf="notification.ImageUrl" [src]="notification.ImageUrl | createSource">
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="deleteNotification(notification, i)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item-sliding *ngFor="let notification of readNotifications; let i = index">
+      <ion-item class="notification" (click)="navigateTo(notification, i)" tappable>
+        <div class="inner-wrapper">
+          <div class="text" [innerHTML]="notification.Message"></div>
+          <div class="time">{{ notification.CreatedOn | date: 'hh:mm a MM/dd/yyyy' }}</div>
+        </div>
+        <img *ngIf="notification.ImageUrl" [src]="notification.ImageUrl | createSource">
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button (click)="deleteNotification(notification, i)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <div class="no-notifications" *ngIf="notifications && !notifications.length">
+    <p>Notifications list is empty</p>
+  </div>
+</div>

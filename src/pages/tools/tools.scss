@@ -1,0 +1,270 @@
+.tools-wrapper ion-content.page-level-1 {
+  //position: absolute;
+  &.show {
+    position: absolute;
+    .page-level-2 {
+      position: relative;
+      &.show {
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
+
+  .scroll-content {
+    overflow: auto;
+  }
+}
+
+.tools-wrapper {
+  margin: 70px 90px 0;
+  &.survey-active {
+    margin: 0;
+  }
+
+  .page-name {
+    margin: 30px 0 10px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
+
+  .tools-menu-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    ion-item {
+      border-top: 1px solid #ECECEC;
+      border-left: 1px solid #ECECEC;
+      border-right: 1px solid #ECECEC;
+      background: url('../assets/images/tools-icons.svg') right -801px no-repeat;
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      margin: 0 20px;
+      background: url('../assets/images/tools-icons.svg') no-repeat;
+      background-size: 30px;
+
+      &.info {
+        background-position: center 1px;
+      }
+      &.places {
+        background-position: center -66px;
+      }
+      &.shapes {
+        background-position: center -132px;
+      }
+      &.wrapper-colors {
+        background-position: center -202px;
+      }
+      &.ring-gauge {
+        background-position: center -270px;
+      }
+      &.top-rated {
+        background-position: center -337px;
+      }
+      &.top-scanned {
+        background-position: center -406px;
+      }
+      &.feedback {
+        background-position: center -474px;
+      }
+      &.about {
+        background-position: center -542px;
+      }
+    }
+  }
+
+  ion-label {
+    height: 40px;
+  }
+
+  ion-list {
+    margin: 0;
+    &.cigar-scanner ion-list-header ion-label {
+      display: flex;
+      margin-right: 0;
+      justify-content: space-between;
+    }
+  }
+
+  ion-list-header {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
+    color: #A7A7A7;
+  }
+
+  .cigar-info {
+    width: 45%;
+    ion-item:last-child {
+      border-bottom: 1px solid #ECECEC;
+    }
+  }
+
+  .right-menus {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    flex-direction: column;
+    ion-list {
+      ion-item:last-child {
+        border-bottom: 1px solid #ECECEC;
+      }
+    }
+
+  }
+
+  .cigar ion-label {
+    height: auto;
+  }
+
+  .segment-wrapper {
+    width: 100%;
+    padding: 15px 10px;
+
+    ion-segment:first-child {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .tools-wrapper ion-content.page-level-1 {
+    position: fixed !important;
+  }
+
+  .tools-wrapper {
+    margin: 55px 0;
+
+    .page-name {
+      display: none;
+    }
+
+    .segment-wrapper {
+      border-bottom: 1px solid #ececec;
+    }
+
+    .tools-menu-wrapper {
+      flex-direction: column;
+
+      ion-item {
+        background: none;
+        font-size: 14px;
+      }
+
+      .icon {
+        width: 30px;
+        height: 30px;
+
+        &.info {
+          background-position: center 1px;
+        }
+        &.places {
+          background-position: center -65px;
+        }
+        &.shapes {
+          background-position: center -134px;
+        }
+        &.wrapper-colors {
+          background-position: center -201px;
+        }
+        &.ring-gauge {
+          height: 32px;
+          background-position: center -268px;
+        }
+        &.top-rated {
+          background-position: center -337px;
+        }
+        &.top-scanned {
+          background-position: center -407px;
+        }
+        &.feedback {
+          background-position: center -475px;
+        }
+        &.about {
+          background-position: center -543px;
+        }
+      }
+    }
+
+    .right-menus,
+    .cigar-info {
+      width: 100%;
+    }
+
+    ion-list {
+      padding: 0;
+      &.cigar-scanner {
+        &.list-md {
+          margin-top: 15px;
+        }
+        &.list-ios {
+          margin-top: 10px;
+        }
+        &.cigar-scanner ion-list-header ion-label {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    .tools-menu-wrapper ion-label {
+      display: flex;
+      height: 30px;
+      flex-direction: row;
+    }
+
+    ion-list-header {
+      text-transform: capitalize;
+      padding-left: 20px;
+      background: #f7f7f7;
+      color: #000;
+
+      ion-label {
+        height: 17px;
+      }
+    }
+
+    .tools-menu-wrapper .list-ios > .item-block:last-child {
+      border-top: 1px solid #ECECEC;
+      border-left: 1px solid #ECECEC;
+      border-right: 1px solid #ECECEC;
+    }
+  }
+
+  .top-cigar-wrapper {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    .cigar {
+      margin-bottom: 0;
+      border-top: none;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

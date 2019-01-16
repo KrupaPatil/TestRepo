@@ -1,0 +1,92 @@
+<div class="settings-wrapper">
+  <div class="page-name">Settings</div>
+
+  <ion-title>Social Posts</ion-title>
+  <ion-item>
+    <ion-label>Automatically Post My Scans To Social Feeds</ion-label>
+    <ion-toggle [(ngModel)]="options.AutoPostScans" color="#dd423e"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Automatically Post My Reviews To Social Feeds</ion-label>
+    <ion-toggle [(ngModel)]="options.AutoPostReviews" color="#dd423e"></ion-toggle>
+  </ion-item>
+
+  <ion-title>Notifications</ion-title>
+  <ion-item>
+    <ion-label>Notify Me if Someone Like My Posts</ion-label>
+    <ion-toggle [(ngModel)]="options.NotifyAboutLikes" color="#dd423e"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Notify Me if Someone Comment on my Posts</ion-label>
+    <ion-toggle [(ngModel)]="options.NotifyAboutComments" color="#dd423e"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Notify Me if Someone starts following me</ion-label>
+    <ion-toggle [(ngModel)]="options.NotifyAboutNewFollowers" color="#dd423e"></ion-toggle>
+  </ion-item>
+
+  <ion-title>Privacy Settings</ion-title>
+  <ion-item>
+    <ion-label>Share my Journal with</ion-label>
+    <ion-select [(ngModel)]="options.ShareJournal">
+      <ion-option *ngFor="let option of dropDownOptions">{{option}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Share my Favorites with</ion-label>
+    <ion-select [(ngModel)]="options.ShareFavorites">
+      <ion-option *ngFor="let option of dropDownOptions">{{option}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Share my WishList with</ion-label>
+    <ion-select [(ngModel)]="options.ShareWishList">
+      <ion-option *ngFor="let option of dropDownOptions">{{option}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Share my Humidors with</ion-label>
+    <ion-select [(ngModel)]="options.ShareHumidorContent">
+      <ion-option *ngFor="let option of dropDownOptions">{{option}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Share my Humidors Value with</ion-label>
+    <ion-select [(ngModel)]="options.ShareHumidorValue">
+      <ion-option *ngFor="let option of dropDownOptions">{{option}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-title>Cigar Assistant</ion-title>
+
+  <div>
+    <div class="code-wrapper">
+      <button class="generate-btn" (click)="generateCode()" ion-button>Generate Code</button>
+      <input class="code" type="text" [ngModel]="code" disabled />
+    </div>
+    <ion-label *ngIf="code">Valid for {{ codeTime }} min</ion-label>
+    <ion-label *ngIf="code" class="code-warning">Do not expose this code to anyone except CA when pairing the Assistant</ion-label>
+  </div>
+
+  <ion-list radio-group [(ngModel)]="options.TemperatureUnit">
+    <ion-title>Temperature Unit</ion-title>
+
+    <ion-item>
+      <ion-label>°F</ion-label>
+      <ion-radio value="F"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>°C</ion-label>
+      <ion-radio value="C"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+  <button class="save-btn" (click)="updateSettings()" ion-button>
+    Save
+  </button>
+
+</div>
+
+

@@ -1,0 +1,66 @@
+.feedback-wrapper {
+  width: 600px;
+  margin: 80px auto 0;
+
+  .page-name {
+    margin: 50px 0 120px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+    &.from-survey {
+      margin: 50px 0 20px;
+    }
+  }
+
+  .survey-info {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  ion-textarea {
+    height: 100px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #969696;
+    color: #000;
+
+    textarea {
+      height: calc(100% - 26px);
+    }
+  }
+
+  ion-textarea textarea::placeholder {
+    color: #cecece;
+  }
+
+  ion-textarea.ng-invalid.ng-dirty, ion-textarea.ng-invalid.ng-touched {
+    border-bottom-color: #f53d3d;
+  }
+
+  .confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    .check {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+      background: url('../assets/images/icons-group.svg') no-repeat;
+      background-position: center -404px;
+      background-size: 40px;
+    }
+    p {
+      font-weight: 600;
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .feedback-wrapper {
+    width: 85%;
+    .page-name {
+      display: none;
+    }
+  }
+}

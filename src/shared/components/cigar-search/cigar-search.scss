@@ -1,0 +1,41 @@
+.cigar-search-wrapper, .user-search-wrapper {
+  margin: 150px 50px 0;
+  width: auto;
+  height: auto;
+  overflow: auto;
+
+  .results-wrapper {
+    height: calc(100% - 120px);
+    margin-top: 10px;
+    padding-top: 10px;
+    overflow: auto;
+  }
+
+  .add-manually {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .cigar-search-wrapper, .user-search-wrapper {
+    width: 100%;
+    height: calc(100% - 140px);
+    margin: 80px 0 0;
+    padding: 0 25px;
+    overflow: hidden;
+
+    .load-more {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .cigar-search-wrapper, .user-search-wrapper {
+    input {
+      height: 45px;
+      padding-left: 60px;
+      font-size: 13px;
+    }
+  }
+}

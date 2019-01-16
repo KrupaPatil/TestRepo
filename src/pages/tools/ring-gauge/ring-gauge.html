@@ -1,0 +1,26 @@
+<div class="gauge-wrapper">
+  <div class="page-name">Ring Gauge Tool</div>
+  <div class="current-value">{{ obj.range }}</div>
+  <div class="circle-wrapper">
+    <svg height="250" width="250">
+      <circle id="circle" cx="125" cy="125" fill="transparent" stroke="#dd423e" stroke-width="1"/>
+      Sorry, your browser does not support inline SVG.
+    </svg>
+    <ion-range [ngClass]="{'disabled': showCalibration}" min="30" max="90" [(ngModel)]="obj.range" (ionChange)="onChange()">
+      <ion-label range-left (click)="decrease()" tappable></ion-label>
+      <ion-label range-right (click)="increase()" tappable></ion-label>
+    </ion-range>
+  </div>
+
+  <div class="calibration-section">
+    <div class="info-wrapper">
+    <p class="info">Place a cigar that you know its ring gauge. Adjust the circle, and if the reading is incorrect, enter the correct ring gauge on the line below:</p>
+      <div class="calibrate-wrapper">
+        <ion-item>
+          <ion-input type="number" [(ngModel)]="obj.userCalibratedRange" (ngModelChange)="onValueChange()"></ion-input>
+        </ion-item>
+        <button class="calibrate-btn" (click)="calibrate()">Calibrate</button>
+      </div>
+    </div>
+  </div>
+</div>

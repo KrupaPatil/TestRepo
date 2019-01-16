@@ -1,0 +1,7 @@
+<div class="user-list-wrapper">
+<div class="header">{{title}}</div>
+<cigar-info *ngFor="let cigar of userList"
+            [cigar]="cigar.CigarDetails"
+            (cigarClicked)="navigateToProduct(cigar.CigarDetails)">
+</cigar-info>
+</div>

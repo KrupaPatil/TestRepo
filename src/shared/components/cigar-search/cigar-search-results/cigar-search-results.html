@@ -1,0 +1,7 @@
+<!--<p>{{ title }} ({{ results ? results.length : 0 }})</p>-->
+
+<div class="search-results-wrapper">
+  <div class="search-results">
+    <div *ngFor="let result of results" (click)="resultClick.emit(result)" tappable>{{ result.Name }}</div>
+  </div>
+</div>

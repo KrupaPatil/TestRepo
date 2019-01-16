@@ -1,0 +1,51 @@
+<div class="user-profile-wrapper">
+
+  <div class="user-info-wrapper">
+    <img *ngIf="userProfile.AvatarUrl" tappable
+         class="post-user-image custom"
+         [src]="userProfile.AvatarUrl  | createSource"/>
+    <img *ngIf="!userProfile.AvatarUrl" class="post-user-image" src="assets/images/user-image.png">
+    <div class="user-info">
+      <div class="name-wrapper">
+        <div class="inner-wrapper">
+          <strong>{{showUserNicknameOrName()}}</strong>
+          <div class="follow" (click)="toggleFollowUser()" *ngIf="showFollow">
+            <ion-icon name="contact" [ngClass]="{ 'following': isFollowed }"></ion-icon>
+            {{ !!isFollowed ? 'FOLLOWING' : 'FOLLOW' }}
+          </div>
+        </div>
+        <span>Joined {{userProfile.RegisteredOn | date:'MMM d, y'}}</span>
+      </div>
+      <div class="social-part-wrapper">
+        <div class="posts">
+          <strong>Posts</strong>
+          <span>{{userProfile.SocialPosts}}</span>
+        </div>
+        <div class="following" (click)="navigateToUserFollowing()" tappable>
+          <strong>Following</strong>
+          <span>{{userProfile.Following}}</span>
+        </div>
+        <div class="followers" (click)="navigateToUserFollowers()" tappable>
+          <strong>Followers</strong>
+          <span>{{userProfile.Followers}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-data">
+    <div (click)="navigateToUserPosts()" tappable>View Latest Posts</div>
+    <div *ngIf="userProfile.Reviews" (click)="navigateToUserReviews()" tappable>View Reviews ({{userProfile.Reviews}})</div>
+    <div *ngIf="userProfile.CigarsInJournal" (click)="navigateToUserListings('journal')" tappable>View Journal ({{userProfile.CigarsInJournal}})</div>
+    <div *ngIf="userProfile.CigarsInFavorites" (click)="navigateToUserListings('favorites')" tappable>View Favorites ({{userProfile.CigarsInFavorites}})</div>
+    <div *ngIf="userProfile.CigarsInWishlist" (click)="navigateToUserListings('wishlist')" tappable>View Wish List ({{userProfile.CigarsInWishlist}})</div>
+    <div *ngIf="userProfile.Humidors" (click)="navigateToUserHumidors()" tappable>View Humidors ({{userProfile.Humidors}}<span *ngIf="userProfile.HumidorsValue">, ${{userProfile.HumidorsValue}}</span>)</div>
+  </div>
+
+  <ion-content class="page-level page-level-2 user-page-holder" pageLevel="2">
+    <router-outlet></router-outlet>
+  </ion-content>
+</div>
+
+
+

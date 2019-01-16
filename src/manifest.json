@@ -1,0 +1,16 @@
+{
+  "name": "Cigar Scanner",
+  "short_name": "Cigar Scanner",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/images/resources/icon.png",
+      "sizes": "725x725",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#dd423e",
+  "theme_color": "#dd423e",
+  "gcm_sender_id": "837749500667"
+}

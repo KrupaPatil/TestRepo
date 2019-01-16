@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "853118462828",
+    "firebase_url": "https://cigarscanner3-1491304216098.firebaseio.com",
+    "project_id": "cigarscanner3-1491304216098",
+    "storage_bucket": "cigarscanner3-1491304216098.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853118462828:android:32b1c82c82700939",
+        "android_client_info": {
+          "package_name": "com.ionicframework.cigarscanner238202"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853118462828-j1g9betbtkftfqplcugo2h1pkhi608tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDbjH2Yjs_Ff_H4FhYiiU0_-j-JLW9qx0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

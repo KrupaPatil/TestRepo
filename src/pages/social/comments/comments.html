@@ -1,0 +1,160 @@
+<div class="post-details-wrapper">
+<div class="post">
+  <div class="post-header">
+    <div class="user-wrapper">
+      <img *ngIf="post.User.AvatarUrl" (click)="navigateToUserProfile(post.User)" class="post-user-image custom" tappable
+           [src]="post.User.AvatarUrl  | createSource"/>
+      <img *ngIf="!post.User.AvatarUrl" class="post-user-image" src="assets/images/user-image.png">
+      <div class="user-info">
+        <div class="name-wrapper">
+          <strong>{{post.User | userName}}</strong>
+          <span>{{ post.Action }}</span>
+          <strong (click)="navigateToProduct(post)" class="title" tappable>{{' ' + post.CigarName}}</strong>
+        </div>
+        <div class="time-posted">{{ post.CreatedOn | date:'MMM d, y, HH:mm' }}</div>
+        <div class="place" *ngIf="post.Location">
+          <i class="place-icon"></i>
+          {{ post.Location }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="review" *ngIf="post.ReviewInfo.Rating">
+    <div class="rating">
+      <div class="overall">
+        <div>overall</div>
+        <span>{{post.ReviewInfo.Rating | number : '1.1-2'}}</span>
+        <rating-stars
+          [starColor]="'yellow'"
+          [rating]="post.ReviewInfo.Rating"
+          [size]="15"></rating-stars>
+      </div>
+      <div class="detailed">
+        <div class="single-rate">
+          <div>draw</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.DrawRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>appearance</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.AppearanceRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>burn</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.BurnRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>aroma</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.AromaRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>taste</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.TasteRating"
+            [size]="15"></rating-stars>
+        </div>
+      </div>
+    </div>
+    <div class="comment" *ngIf="post.ReviewInfo.Comment">{{post.ReviewInfo.Comment}}</div>
+  </div>
+  <div class="content">
+    <p class="text">{{ post.Text }}</p>
+    <img *ngIf="post.ImageUrl" class="post-image" [src]="post.ImageUrl | createSource"/>
+  </div>
+  <div class="comment-section">
+    <div class="like-wrapper">
+      <i class="like-icon" [ngClass]="{'liked': post.Liked }"></i>
+      <div class="like-number" (click)="navigateToPostLikes(post)" [ngClass]="{'liked': post.Likes }" tappable>{{ post.Likes }}</div>
+    </div>
+    <div class="separator"></div>
+    <div class="comment">{{ comments.length }}</div>
+  </div>
+
+  <div class="comments-wrapper">
+    <div class="comment-wrapper" *ngFor="let comment of comments; let i = index">
+      <div class="info-wrapper">
+        <img *ngIf="comment.User.AvatarUrl" class="comment-user-image custom"  (click)="navigateToUserProfile(comment.User)" tappable [src]="comment.User.AvatarUrl | createSource"/>
+        <img *ngIf="!comment.User.AvatarUrl" class="comment-user-image" src="assets/images/user-image.png">
+
+        <div class="info">
+          <div class="name">{{comment.User | userName}}</div>
+          <div class="date">{{ comment.CreatedOn | date:'MMM d, y, HH:mm' }}</div>
+        </div>
+      </div>
+      <div class="text" *ngIf="!inEditMode(comment)"
+           [innerHTML]="comment.Text | nl2br">
+      </div>
+      <div *ngIf="inEditMode(comment)">
+        <form #form="ngForm"
+              class="comments-form"
+              (ngSubmit)="editComment(comment, form)">
+          <ion-list>
+            <ion-item class="insert-comment">
+              <ion-label floating>Edit comment...</ion-label>
+              <ion-textarea
+                type="text"
+                autocorrect="on"
+                autocomplete="on"
+                name="comment-text"
+                [(ngModel)]="comment.Text"
+                #commentText="ngModel"
+                required></ion-textarea>
+            </ion-item>
+            <div class="error-wrapper" *ngIf="!commentText.valid && (commentText.touched || form.submitted)">
+              <p class="error-message" *ngIf="commentText.errors?.required">Field is required</p>
+            </div>
+            <ion-item class="edit-comment">
+              <button (click)="cancelEditMode(comment)">Cancel</button>
+              <button>Save</button>
+            </ion-item>
+          </ion-list>
+        </form>
+      </div>
+      <div *ngIf="isOwnedByLoggedInUser(comment) && !inEditMode(comment)" class="edit-comment">
+        <button (click)="enterEditMode(comment)">edit</button>
+        <button (click)="deleteComment(comment, i)">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <form #form="ngForm"
+          class="comments-form new-comment"
+          (ngSubmit)="addComment(form)">
+      <ion-list>
+        <ion-item class="insert-comment">
+          <ion-label floating>Write a comment...</ion-label>
+          <ion-textarea
+            type="text"
+            type="text"
+            autocorrect="on"
+            autocomplete="on"
+            name="comment-text"
+            [(ngModel)]="text"
+            #commentText="ngModel"
+            required></ion-textarea>
+        </ion-item>
+        <ion-item class="post-button">
+          <button type="submit" ion-button [disabled]="commentText.errors?.required">
+            <span class="button-text">Post</span>
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+    </form>
+</div>
+
+<ion-content class="cigar-details-wrapper page-level page-level-2 comments-level" pageLevel="2">
+  <router-outlet></router-outlet>
+</ion-content>

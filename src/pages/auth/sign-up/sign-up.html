@@ -1,0 +1,114 @@
+<div class="register-page">
+
+  <div [hidden]="!showCropper" class="crop-wrapper">
+    <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+    <div class="buttons-wrapper">
+      <button class="cancel-button" (click)="cancelAvatarChange()"></button>
+      <button class="upload-button" (click)="submitImage()"></button>
+    </div>
+  </div>
+
+    <button ion-button backLink icon-only>
+      <ion-icon  name="close"></ion-icon>
+    </button>
+
+  <div class="button-wrapper">
+    <img *ngIf="userData.AvatarUrl" [src]="userData.AvatarUrl" style="width: 200px"/>
+    <button class="upload-photo" *ngIf="!userData.AvatarUrl" (click)="changeProfilePicture()"></button>
+    <p>Upload a Photo of You</p>
+    <button class="remove-photo" *ngIf="userData.AvatarUrl" (click)="removeProfilePicture()">Remove Photo</button>
+  </div>
+
+  <form #form="ngForm"
+        (ngSubmit)="submit(form)"
+        novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="First Name *"
+          name="first-name"
+          [(ngModel)]="userData.FirstName"
+          #firstName="ngModel"
+          required></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!firstName.valid && (firstName.touched || form.submitted)">
+        <p class="warning-message" *ngIf="firstName.errors?.required">Field is required</p>
+      </div>
+
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Last Name *"
+          name="last-name"
+          [(ngModel)]="userData.LastName"
+          #lastName="ngModel"
+          required></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!lastName.valid && (lastName.touched || form.submitted)">
+        <p class="warning-message" *ngIf="lastName.errors?.required">Field is required</p>
+      </div>
+
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Nickname"
+          name="nick-name"
+          [(ngModel)]="userData.Nickname"
+          #nickName="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="email"
+          placeholder="Email *"
+          name="email"
+          [(ngModel)]="userData.Email"
+          #email="ngModel"
+          required
+          email></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!email.valid && (email.touched || form.submitted)">
+        <p class="warning-message" *ngIf="email.errors?.required">Field is required</p>
+        <p class="warning-message" *ngIf="email.errors?.email && !email.errors?.required">Invalid Email</p>
+      </div>
+
+      <ion-item>
+        <ion-input
+          type="password"
+          name="password"
+          placeholder="Password *"
+          [(ngModel)]="userData.Password"
+          #password="ngModel"
+          required
+          [minlength]="6"></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!password.valid && (password.touched || form.submitted)">
+        <p class="warning-message" *ngIf="password.errors?.required">Field is required</p>
+        <p class="warning-message" *ngIf="password.errors?.minlength">Minimum 6 characters</p>
+      </div>
+
+      <ion-item>
+        <ion-input
+          type="password"
+          name="confirm-password"
+          placeholder="Confirm Password *"
+          [(ngModel)]="userData.ConfirmPassword"
+          #confirmPassword="ngModel"
+          required
+          [equalTo]="password"></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!confirmPassword.valid && (confirmPassword.touched || form.submitted)">
+        <p class="warning-message" *ngIf="confirmPassword.errors?.required">Field is required</p>
+        <p class="warning-message" *ngIf="confirmPassword.errors?.equalTo">Passwords don't match</p>
+      </div>
+
+      <ion-item>
+        <button type="submit" ion-button>
+          Register
+        </button>
+      </ion-item>
+    </ion-list>
+    <a class="login-button" routerLink="/login" tappable>I have an account</a>
+  </form>
+</div>

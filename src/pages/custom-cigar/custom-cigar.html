@@ -1,0 +1,39 @@
+<div class="custom-cigar-wrapper">
+  <div class="page-name">{{heading}}</div>
+  <ion-list>
+    <form #form="ngForm" (ngSubmit)="submit(form.valid)" novalidate>
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Cigar Name"
+          name="name"
+          #name="ngModel"
+          required
+          [(ngModel)]="cigarData.Name"></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!name.valid && (name.touched || form.submitted)">
+        <p class="warning-message" *ngIf="name.errors?.required">Field is required</p>
+      </div>
+
+      <ion-item>
+        <ion-textarea
+          type="text"
+          placeholder="Note"
+          name="text"
+          #text="ngModel"
+          [(ngModel)]="cigarData.Description" required></ion-textarea>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!text.valid && (text.touched || form.submitted)">
+        <p class="warning-message" *ngIf="text.errors?.required">Field is required</p>
+      </div>
+      <div class="button-wrapper">
+        <button [ngClass]="{'full-width': getButtonText() !== 'Save'}" type="submit" ion-button>
+          {{ getButtonText() }}
+        </button>
+
+        <div class="delete" *ngIf="this.cigar" (click)="remove(this.cigar)">delete</div>
+      </div>
+    </form>
+  </ion-list>
+</div>
+

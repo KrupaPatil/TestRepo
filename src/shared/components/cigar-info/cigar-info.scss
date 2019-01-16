@@ -1,0 +1,367 @@
+ion-item.cigar {
+  padding-right: 22px;
+  border: 1px solid #ececec;
+  cursor: pointer;
+  transition: all 0.15s !important;
+  transform: translateX(0px);
+  z-index: 1;
+
+  &.show-options {
+    transform: translateX(-107px);
+  }
+
+  &.product-post:after {
+    background: none;
+  }
+
+  .item-inner {
+    padding-right: 20px;
+    transition: padding 0.25s ease-out;
+  }
+
+  ion-label {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20px;
+    padding-left: 3px;
+    padding-top: 4px;
+  }
+
+  &:after {
+    content: '';
+    width: 15px;
+    height: 17px;
+    background: url('../assets/images/cigar-info-icons.svg') no-repeat;
+    background-size: 20px;
+    background-position: 0 -108px;
+  }
+
+  rating-stars {
+    min-width: 80px;
+  }
+
+  .user-info-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      margin-top: 5px;
+    }
+
+    div {
+      color: #A7A7A7;
+      font-size: 12px;
+    }
+
+    .rating {
+      align-items: flex-end;
+    }
+
+    rating-stars {
+      margin-left: 5px;
+    }
+  }
+}
+
+.shrink .cigar-info-container {
+  display: flex;
+  justify-content: center;
+  width: 96%;
+}
+
+.cigar-info-container {
+  position: relative;
+  width: 90%;
+  transition: width 0.25s ease-out;
+  margin: 5px auto;
+  overflow: inherit;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .button-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    border: none;
+
+    .add, .delete {
+      height: 100%;
+      margin: 0;
+      padding: 0 18px;
+      font-size: 25px;
+      color: #fff;
+      border-radius: 0;
+    }
+
+    .add {
+      background: $cs-red;
+      &:hover {
+        background: $cs-red;
+      }
+    }
+    .delete {
+      background-color: #a71f1c;
+      &:hover {
+        background: #a71f1c;
+      }
+    }
+  }
+}
+
+.product-data {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &.social-post {
+    margin: 20px 0 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #A7A7A7;
+    flex-direction: column;
+    align-items: start;
+
+    .cigar-info-wrapper {
+      width: 100%;
+      align-items: flex-start;
+      margin-left: 0;
+    }
+
+    .cigar-price-wrapper {
+      width: 100%;
+    }
+
+    .market-price-wrapper {
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .price-type,
+    .per-cigar {
+      margin-right: 17px;
+    }
+  }
+}
+
+.cigar-info-wrapper {
+  display: flex;
+  width: 35%;
+  align-items: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  transition: width 0.5s ease-out;
+}
+
+.name-rating {
+  margin-left: 15px;
+}
+
+.cigar-name {
+  white-space: normal;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.rating {
+  display: flex;
+  align-items: end;
+  .value {
+    margin: 0 5px 0 5px;
+    font-size: 14px;
+    color: #A7A7A7;
+  }
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cigar-price-wrapper {
+  display: block;
+  width: 60%;
+  flex-shrink: 0;
+  transition: width 0.5s ease-out;
+}
+
+.market-price-wrapper,
+.partner-price-wrapper {
+  display: flex;
+  justify-content: space-between;
+  div {
+    font-size: 14px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &.price-divider {
+    border-bottom: 1px solid #ECECEC;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+.price-type {
+  flex: 2;
+  font-size: 12px;
+  color: #A7A7A7;
+}
+
+.per-cigar,
+.per-humidor {
+  flex: 3;
+  padding-left: 34px;
+  line-height: 20px;
+  color: #E3B6B4;
+  font-size: 12px;
+  background: url('../assets/images/cigar-info-icons.svg') no-repeat;
+  background-size: 20px;
+}
+
+.per-cigar {
+  background-position: 0 0;
+}
+
+.per-humidor {
+  background-position: 0 -74px;
+}
+
+.shrink {
+  .cigar-info-wrapper {
+    width: 46%;
+  }
+  .cigar-price-wrapper {
+    width: 54%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+
+  .name-rating {
+    margin-left: 10px;
+  }
+
+  .price-type {
+    margin-right: 15px;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .cigar-info-container {
+    width: 100%;
+    &:last-child {
+      margin-bottom: 5px;
+    }
+  }
+
+  ion-item.cigar {
+    width: 100%;
+    //margin: 0 auto 10px;
+    margin: 0;
+    padding-right: 15px;
+
+    ion-label {
+      margin-left: 15px;
+      align-items: baseline;
+      flex-direction: column;
+    }
+  }
+
+  .product-data {
+    flex-direction: column;
+  }
+
+  .user-info-wrapper {
+    .rating {
+      flex-wrap: wrap;
+    }
+    .user-info {
+      white-space: normal;
+    }
+  }
+
+  .market-price-wrapper,
+  .partner-price-wrapper {
+    align-items: center;
+    justify-content: flex-start;
+    div {
+      flex: none;
+      font-size: 12px;
+    }
+    .per-cigar,
+    .price-type {
+      margin-right: 17px;
+    }
+
+    &.price-divider {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .cigar-info-wrapper {
+    width: 100%;
+    align-items: flex-start;
+    margin-right: 0;
+    > img {
+      width: 55px;
+      margin: 0 20px 10px 0;
+    }
+  }
+
+  .cigar-price-wrapper {
+    width: 100%;
+  }
+
+  .cigar-name {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .description {
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .per-cigar,
+  .per-humidor {
+    padding-left: 24px;
+    background-size: 17px;
+  }
+
+  .per-cigar {
+    background-position: 0 1px;
+  }
+
+  .per-humidor {
+    background-position: 0 -62px;
+  }
+}
+
+@media (max-width: 350px) {
+
+  .market-price-wrapper,
+  .partner-price-wrapper {
+    div {
+      font-size: 11px;
+    }
+    .price-type {
+    }
+  }
+
+  ion-item.cigar {
+    padding-right: 8px;
+
+    ion-label {
+      margin-left: 10px;
+      margin-right: 4px;
+
+    }
+  }
+}

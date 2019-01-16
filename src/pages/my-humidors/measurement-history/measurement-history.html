@@ -1,0 +1,33 @@
+<div class="measurement-history-wrapper">
+  <div class="heading">Measurement History</div>
+
+  <p>Filter dates:</p>
+  <div class="filter-date-wrapper">
+    <ion-item>
+      <ion-label>From:</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD HH:mm:ss" min="{{dateFromLimit}}" max="{{dateTo}}" [(ngModel)]="dateFrom"
+                    (ngModelChange)="filterResults()">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>To:</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD HH:mm:ss" min="{{dateFrom}}" max="{{today}}" [(ngModel)]="dateTo"
+                    (ngModelChange)="filterResults()">
+      </ion-datetime>
+    </ion-item>
+  </div>
+
+  <div class="chart-wrapper">
+    <canvas #lineCanvas></canvas>
+  </div>
+  <div class="button-wrapper">
+    <button ion-button [ngClass]="{'active': this.selectedChart == 'humidity'}" (click)="showHumidityGraph()">Humidity
+      Graph
+    </button>
+    <button ion-button [ngClass]="{'active': this.selectedChart == 'temp'}" (click)="showTemperatureGraph()">Temperature
+      Graph
+    </button>
+  </div>
+
+</div>
+

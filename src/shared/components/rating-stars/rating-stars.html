@@ -1,0 +1,14 @@
+<div class="star-wrapper" tappable
+     *ngFor="let star of allStars; let i = index"
+     (tap)="changeRating(i + 1)"
+     [style.width]="size + 'px'"
+     [style.height]="size + 'px'">
+  <img class="outer-star"
+       [src]="borderImageLink"
+       [style.width]="size + 'px'"
+       [style.height]="size + 'px'"/>
+  <div class="inner-star"
+       [ngStyle]="{'width': fillPercentage(i) + '%','background-image': 'url(' + fillImageLink + ')'}"
+       [style.height]="size + 'px'">
+  </div>
+</div>

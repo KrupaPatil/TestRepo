@@ -1,0 +1,328 @@
+.humidor-details-holder {
+  width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+
+  ion-fab {
+    bottom: 80px;
+    right: 13px;
+    z-index: 9999;
+
+    .toggle-menu {
+      width: 55px;
+      height: 55px;
+      padding: 0;
+      border-radius: 50%;
+      background: $cs-red;
+      box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.6);
+    }
+
+    ion-icon[name="md-add"] {
+      font-size: 40px;
+      color: #fff;
+    }
+
+    .fab-close-active .fab-close-icon {
+      line-height: 55px;
+      font-size: 30px;
+    }
+
+    ion-fab-list {
+      right: 3px;
+
+      button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: transparent;
+      }
+
+      .info {
+        width: 120px;
+        margin: 15px;
+        padding: 6px 8px;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.6);
+      }
+
+      .camera-icon,
+      .search-icon {
+        width: 35px;
+        height: 35px;
+        margin: 0;
+        border-radius: 50%;
+        background: $cs-red;
+        box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.6);
+      }
+
+      .camera-icon {
+        background: #dba7a6 url('../assets/images/icons-group.svg') center no-repeat/23px;
+        background-position: center -88px;
+      }
+      .search-icon {
+        background: #dba7a6 url('../assets/images/icons-group.svg') center no-repeat/17px;
+        background-position: center 9px;
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.8;
+  }
+}
+
+.humidor-details-container {
+  height: 100%;
+  width: 200%;
+  display: flex;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.humidor-details-wrapper {
+  width: 50%;
+  overflow: auto;
+  transition: width 0.25s ease-out;
+  &.shrink {
+    width: 25%;
+  }
+
+  .humidor-info {
+    position: relative;
+    display: flex;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #ececec;
+    p {
+      display: flex;
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    ion-icon {
+      font-size: 20px;
+      color: $cs-red;
+      margin-right: 5px;
+    }
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    margin-left: 0;
+    transform: translateY(-50%);
+  }
+
+  .list {
+    height: calc(100vh - 106px);
+    margin: 0;
+    overflow: auto;
+  }
+
+  .cigars-image {
+    display: block;
+    height: 200px;
+    margin: 50px auto 20px;
+  }
+
+  .usage {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    ion-icon {
+      margin: 0 3px;
+      font-size: 20px;
+      color: $cs-red;
+    }
+  }
+
+  ion-item ion-label {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 15px 0 0;
+    padding: 0 10px 15px 0;
+    border-bottom: 1px solid #ececec;
+  }
+
+  .info-wrapper {
+    display: flex;
+    cursor: pointer;
+
+    .cigar-image {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      white-space: initial;
+    }
+
+    .name {
+      font-size: 16px;
+      color: #000;
+    }
+
+    .rating-price {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #666;
+
+      .rating,
+      .price {
+        display: flex;
+        align-items: center;
+      }
+
+      .rating {
+        margin-right: 10px;
+      }
+
+      .icon-rating,
+      .icon-price {
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        margin-right: 2px;
+        padding: 0;
+        background: url('../assets/images/cigar-info-icons.svg') no-repeat;
+        background-size: 15px;
+      }
+      .icon-rating {
+        background-position: center -27px;
+      }
+      &.icon-price {
+        background-position: center 3px;
+      }
+    }
+
+    .added {
+      font-size: 13px;
+      font-style: italic;
+    }
+
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      padding: 0;
+      border-radius: 50%;
+      background: $cs-red;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .value {
+      width: 60px;
+      margin: 0 5px;
+      font-size: 24px;
+      color: #666;
+      border: 0;
+      border-bottom: 1px solid grey;
+      text-align: center;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+}
+
+@media (max-width: 1200px) {
+
+  .humidor-details-holder {
+    &.hide-scroll {
+      overflow: hidden;
+    }
+  }
+
+  .humidor-details-container {
+    .page-level-3 {
+      position: fixed !important;
+    }
+  }
+
+  .humidor-details-wrapper {
+    height: calc(100% - 73px);
+    margin-top: 60px;
+    overflow: auto;
+    .info-wrapper {
+      white-space: normal;
+
+      .name {
+        font-size: 14px;
+      }
+    }
+
+    .cigars-image {
+      margin: 40px auto 20px;
+      height: 120px;
+    }
+
+    .list {
+      height: calc(100vh - 208px);
+      margin: 0;
+      padding-bottom: 50px;
+    }
+
+    .humidor-info {
+      border: 0;
+      padding: 0px 5px;
+
+      .back-btn {
+        display: none;
+      }
+    }
+
+    .sort-buttons-wrapper {
+      border-bottom: 1px solid #ececec;
+    }
+
+    .usage {
+      width: 95%;
+      margin: 0 auto;
+      font-size: 13px;
+    }
+
+    .button-wrapper {
+      .value {
+        width: 50px;
+        font-size: 21px;
+      }
+    }
+  }
+
+  ion-fab.add-to-humidor-btn {
+    bottom: 70px;
+    z-index: 999;
+  }
+}

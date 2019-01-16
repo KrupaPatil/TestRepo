@@ -1,0 +1,98 @@
+.user-humidors-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: scroll;
+
+  .humidor-name {
+    margin: 25px 0;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  ion-item ion-label {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 15px 0 0;
+    padding: 0 10px 15px;
+    border-bottom: 1px solid #ececec;
+  }
+
+  .info-wrapper {
+    display: flex;
+    margin-left: 25px;
+    cursor: pointer;
+
+    .cigar-image {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      white-space: initial;
+    }
+
+    .name {
+      font-size: 16px;
+      color: #000;
+    }
+
+    .rating-price {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #666;
+
+      .rating,
+      .price {
+        display: flex;
+        align-items: center;
+      }
+
+      .rating {
+        margin-right: 10px;
+      }
+
+      .icon-rating,
+      .icon-price {
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        margin-right: 2px;
+        padding: 0;
+        background: url('../assets/images/cigar-info-icons.svg') no-repeat;
+        background-size: 15px;
+      }
+      .icon-rating {
+        background-position: center -27px;
+      }
+      &.icon-price {
+        background-position: center 3px;
+      }
+    }
+
+    .added {
+      font-size: 13px;
+      font-style: italic;
+    }
+
+  }
+}
+
+@media (max-width: 1200px) {
+  .user-humidors-wrapper {
+    margin: 60px 0;
+
+    ion-list {
+      padding-bottom: 10px;
+      margin: 0;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<div class="cigar-search-wrapper">
+  <input class="search-input" #searchInput type="text" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search by Cigar or Brand Names">
+
+  <ion-segment color="primary" [(ngModel)]="viewType">
+    <ion-segment-button value="all-cigars">
+      All Cigars ({{ resultsAll ? resultsAll.length : 0 }})
+    </ion-segment-button>
+    <ion-segment-button value="my-journal" *ngIf="searchJournal">
+      My Journal ({{ resultsJournal ? resultsJournal.length : 0 }})
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="results-wrapper">
+    <div *ngIf="viewType=='all-cigars'">
+      <cigar-search-results
+        title="All Cigars"
+        [results]="resultsAll"
+        (resultClick)="resultClick.emit($event)">
+      </cigar-search-results>
+      <div *ngIf="showLoadMore">
+        <button class="load-more" (click)="loadMore()">Load more</button>
+      </div>
+      <div class="add-manually search-style" (click)="goToAddCustomCigarPage()" *ngIf="addManually" tappable>
+        <ion-icon ios="md-add" md="md-add"></ion-icon>
+        <div class="inner-wrapper">
+          <p>Your cigar is not listed?</p>
+          <p>Add your cigar</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="viewType=='my-journal' && searchJournal">
+      <cigar-search-results
+        title="My Journal"
+        [results]="resultsJournal"
+        (resultClick)="resultClick.emit($event)">
+      </cigar-search-results>
+      <div *ngIf="showLoadMoreJournal">
+        <button (click)="loadMoreJournal()">Load more journal</button>
+      </div>
+      <div class="add-manually search-style" (click)="goToAddCustomCigarPage()" tappable *ngIf="addManually">
+        <ion-icon ios="md-add" md="md-add"></ion-icon>
+        <div class="inner-wrapper">
+          <p>Your cigar is not listed?</p>
+          <p>Add your cigar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

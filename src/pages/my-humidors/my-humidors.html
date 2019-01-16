@@ -1,0 +1,113 @@
+<div class="total-info">
+  <div>
+    <span class="icon-humidor"></span>
+    <span>{{ humidors.length }} {{ humidors.length == 1 ? 'Humidor' : 'Humidors' }}</span>
+  </div>
+  <div>
+    <span class="icon-cigar"></span>
+    <span>{{ humidorsTotalCigars() }}</span>
+  </div>
+  <div>
+    <ion-icon name="logo-usd"></ion-icon>
+    <span>{{ humidorsTotalPrice() }}</span>
+  </div>
+</div>
+<div class="humidor-outer-wrapper">
+  <div class="humidors-container">
+    <div class="page-name">My Humidors</div>
+    <div class="humidor-list-wrapper" [ngClass]="{'no-humidor': !humidors}">
+      <ion-list>
+        <ion-item
+          class="humidor"
+          *ngFor="let humidor of humidors">
+          <div class="item-wrapper" [routerLink]="humidor.getDetailsUrl()">
+            <div class="humidor-header">
+              <div class="cigar-image-wrapper">
+                <div class="image-wrap"
+                     *ngFor="let cigar of humidor.Cigars | sortHumidorsPipe | slice:0:6 :'cigar'">
+                  <div class="cigar-image" *ngIf="cigar.Product.ImageUrl"
+                       [style.background-image]="'url(' + (cigar.Product.ImageUrl | createSource) + ')'"></div>
+                  <div *ngIf="!cigar.Product.ImageUrl" class="no-image"></div>
+                </div>
+              </div>
+              <div class="humidor-measurements" [ngClass]="{'offline': humidor.SensorOfflineSince }" (click)="navigateTo(humidor)">
+                <div class="humidity">
+                  <div class="drop-wrapper">
+                    <img class="drop-image" src="assets/images/drop.png">
+                    <span>%</span>
+                  </div>
+                  <p class="percentage" *ngIf="!humidor.SensorOfflineSince && !humidor.Humidity">70</p>
+                  <p class="percentage" *ngIf="humidor.SensorOfflineSince">--</p>
+                  <p class="percentage" *ngIf="!humidor.SensorOfflineSince && humidor.Humidity">{{ humidor.Humidity | number : '1.0-0' }}</p>
+                </div>
+                <div class="bottom-info-wrapper" [ngClass]="{'no-battery': !humidor.SensorMeasurementDate && !humidor.SensorOfflineSince}">
+                  <div class="battery"
+                       *ngIf="!humidor.SensorOfflineSince && humidor.SensorMeasurementDate"
+                       [ngClass]="{'battery-low': humidor.SensorBatteryLevel && humidor.SensorBatteryLevel < 25}">
+                    <div class="bar-holder">
+                      <div class="line-holder"
+                           [ngClass]="{'battery-low': humidor.SensorBatteryLevel && humidor.SensorBatteryLevel < 25}"
+                           [ngStyle]="{ 'height': humidor.SensorBatteryLevel + '%' }">
+                        <div class="block"></div>
+                        <div class="block"></div>
+                        <div class="block"></div>
+                        <div class="block"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <ion-icon *ngIf="humidor.SensorOfflineSince" class="warning" name="warning"></ion-icon>
+
+                  <div class="temp-time-wrapper" *ngIf="!humidor.SensorOfflineSince">
+                    <div class="temperature">{{ displayTempValue(humidor.Temperature) || '70'}}°{{settings.TemperatureUnit}}</div>
+                    <div class="time-stamp" *ngIf="humidor.SensorMeasurementDate"><p>Last Changed On:</p><p>{{ humidor.Date | localTime }}</p></div>
+                    <div class="time-stamp" *ngIf="!humidor.SensorMeasurementDate"><p>Monitor Your Humidor</p><p>Anywhere, Anytime!</p></div>
+                  </div>
+
+                  <div class="temp-time-wrapper" *ngIf="humidor.SensorOfflineSince">
+                    <div class="temperature">--</div>
+                    <div class="time-stamp"><p>Offline Since:</p><p>{{ humidor.SensorOfflineSince | localTime }}</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="humidor-name">{{ humidor.Name }}</div>
+            <div class="humidor-info">
+              <div class="info-wrapper">
+                <button class="edit" ion-button (click)="edit($event, humidor)">
+                  <ion-icon name="md-create"></ion-icon>
+                </button>
+                <ion-icon name="logo-usd"></ion-icon>
+                <div class="price"><span [innerHtml]="humidor.totalPrice()"></span> ({{
+                  humidor.getTotalNumberOfCigars()}} cigars)
+                </div>
+              </div>
+              <div class="info-wrapper time-dates">
+                <ion-icon name="time"></ion-icon>
+                <div *ngIf="humidor.CreatedOn" class="created">Created on {{humidor.CreatedOn | date}}</div>
+              </div>
+              <div class="added-removed-info">
+                <div *ngIf="humidor.CigarDeletedOn" class="created">
+                  Last cigar removed on {{humidor.CigarDeletedOn | date}}
+                </div>
+                <div *ngIf="humidor.CigarAddedOn" class="created">
+                  Last cigar added on {{humidor.CigarAddedOn | date}}
+                </div>
+                <div *ngIf="humidor.CigarUpdatedOn" class="created">
+                  Last cigar modified on {{humidor.CigarUpdatedOn | date}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+      <p *ngIf="!humidors">You Humidor List is currently empty. Add humidor by clicking on the button below.</p>
+      <button class="create" ion-button [routerLink]="'/my-humidors/create'">
+        <span *ngIf="humidors">Create another humidor</span>
+        <span *ngIf="!humidors">Create humidor</span>
+      </button>
+    </div>
+  </div>
+</div>
+<ion-content class="cigar-details-wrapper humudor-tab page-level page-level-1" pageLevel="1">
+  <router-outlet></router-outlet>
+</ion-content>

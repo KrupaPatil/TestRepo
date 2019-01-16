@@ -1,0 +1,369 @@
+<div class="action-buttons">
+  <div class="add" (tap)="addTo()" tappable>
+    <ion-icon name="md-add"></ion-icon>
+    Add to
+  </div>
+  <div class="delete" *ngIf="cigarListItem" (tap)="remove()" tappable>
+    <ion-icon name="ios-trash-outline"></ion-icon>
+    Delete
+  </div>
+  <div class="share" (tap)="shareOptions()" [ngClass]="{'no-delete': !cigarListItem}" tappable>
+    <ion-icon ios="md-share" md="md-share"></ion-icon>
+  </div>
+</div>
+
+<div class="cigar-details-container" [ngStyle]="{'display': showDetails ? 'block' : 'none'}">
+  <div class="cigar-preview-wrapper">
+    <div class="info-wrapper" *ngIf="cigarListItem">
+      <div class="location-details">
+        <div class="place">{{ cigarListItem?.Location }}</div>
+        <div class="details">
+          <span>{{ cigarListItem?.Date | date }}</span>
+          <span *ngIf="cigarListItem?.Price"> | ${{ cigarListItem.Price }}</span>
+          <span *ngIf="cigarListItem?.Product?.MyCigarFeatures?.SmokingTime"> | {{ cigarListItem.Product.MyCigarFeatures.SmokingTime }}min</span>
+        </div>
+      </div>
+      <ion-item class="edit-details" (tap)="toggleCigarLogInfo()" tappable></ion-item>
+    </div>
+    <div class="cigar-preview"
+         tappable
+         (tap)="goToGallery()"
+        [style.background-image]="setBackgroundImageUrl()"
+        [style.background-color]="backgroundImageUrl ? '#000' : ''"
+        [style.background-size]="backgroundImageUrl ? '150%' : ''">
+    </div>
+  </div>
+
+  <button class="bad-result" *ngIf="showBadResultButton" (tap)="reportBadResult()">Report wrong result</button>
+  <div class="inner-cigar-wrapper">
+    <div class="brand">
+      <cigar-brand-logo [cigar]="cigar" [detailsStyle]="true"></cigar-brand-logo>
+      <div>
+        <div class="cigar-name">{{ cigar.Name }}</div>
+        <div class="rating">
+          <rating-stars
+            [rating]="cigar.RatingSummary?.AverageRating"
+            [size]="15"></rating-stars>
+          <div class="value">Rating: {{ cigar.RatingSummary?.AverageRating }}({{ cigar.RatingSummary?.RatingCount }})
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cigar-price-wrapper">
+      <cigar-price
+        [type]="'U.S. Retail'"
+        [cigarPrices]="cigar.Prices"
+        [boxQuantityMin]="cigar?.MinBoxQty"
+        [boxQuantityMax]="cigar?.MaxBoxQty">
+      </cigar-price>
+
+      <cigar-price
+        *ngIf="cigar.Prices?.showPartnerPrices()"
+        [type]="'Partner price'"
+        [cigarPrices]="cigar.PartnerPrices"
+        [boxQuantityMin]="cigar?.MinBoxQty"
+        [boxQuantityMax]="cigar?.MaxBoxQty">
+      </cigar-price>
+
+      <cigar-price
+        *ngIf="cigar.Prices?.showPartnerPrices()"
+        [type]="'Best price'"
+        [cigarPrices]="cigar.bestPrices()"
+        [boxQuantityMin]="cigar?.MinBoxQty"
+        [boxQuantityMax]="cigar?.MaxBoxQty">
+      </cigar-price>
+    </div>
+
+    <div class="my-rating-inner-wrapper">
+      <div *ngIf="cigar.MyRating">
+        <div class="inner-wrapper" *ngIf="cigar.MyRating.Rating">
+          <p class="heading">My Rating</p>
+          <div class="edit" (tap)="toggleRating()" tappable></div>
+        </div>
+        <p *ngIf="!cigar.MyRating.Rating" class="heading">How would you rate it?</p>
+      </div>
+      <div class="inner-wrapper" [ngClass]="{'user-rated': userRatedProduct}">
+        <rating-stars [rating]="setRating(cigar)"
+                      [starColor]="'yellow'"
+                      [rateable]="!userRatedProduct"
+                      [setAll]="true"
+                      (setAllStars)="setAllStars($event)"
+                      [size]="25">
+        </rating-stars>
+        <p *ngIf="cigar.MyRating">{{ cigar.MyRating.CreatedOn | date }}</p>
+      </div>
+      <div class="comment" *ngIf="cigar.MyRating">
+        {{ cigar.MyRating.Comment }}
+      </div>
+    </div>
+
+    <div class="personal-note-wrapper" *ngIf="cigarListItem">
+      <div class="inner-wrapper">
+        <p class="heading">Personal Note</p>
+        <ion-item class="edit" (tap)="toggleNote()" tappable></ion-item>
+      </div>
+      <div class="inner-wrapper" *ngIf="cigar.MyNote">
+        <div class="comment" [innerHTML]="cigar.MyNote.Note | nl2br">
+        </div>
+      </div>
+    </div>
+
+    <div class="description-wrapper">
+      <div class="inner-wrapper">
+        <p class="heading">Description</p>
+      </div>
+      <div class="inner-wrapper">
+        <div class="comment">
+          {{ cigar.Description }}
+        </div>
+      </div>
+    </div>
+
+    <div class="product-photos-wrapper" *ngIf="cigar?.Images?.length">
+      <div class="inner-wrapper">
+        <p class="heading">Product Photos ({{cigar?.Images?.length}})</p>
+      </div>
+      <div class="inner-wrapper">
+        <ion-slides pager="true">
+          <ion-slide *ngFor="let image of cigar.Images">
+            <img [src]="image.ImageUrl | createSource"/>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </div>
+
+    <div class="specifications">
+      <div class="inner-wrapper">
+        <p class="heading">Specifications</p>
+      </div>
+      <div class="inner-wrapper" *ngIf="cigar.Attributes">
+        <div class="property active" *ngIf="cigar.Attributes?.Manufacturer" (tap)="toggleAttribute('Manufacturer')"
+             tappable>
+          <p class="name">Manufacturer</p>
+          <p class="name">{{ cigar.Attributes?.Manufacturer }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.Origin">
+          <p class="name">Origin</p>
+          <p class="name">{{ cigar.Attributes?.Origin }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.Strength">
+          <p class="name">Strength</p>
+          <p class="name">{{ cigar.Attributes?.Strength }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.Wrapper">
+          <p class="name">Wrapper</p>
+          <p class="name">{{ cigar.Attributes?.Wrapper }}</p>
+        </div>
+        <div class="property active" *ngIf="cigar.Attributes?.WrapperColor" (tap)="toggleAttribute('WrapperColor')"
+             tappable>
+          <p class="name">Wrapper Color</p>
+          <p class="name">{{ cigar.Attributes?.WrapperColor }}</p>
+        </div>
+        <div class="property active" *ngIf="cigar.Attributes?.Binder" (tap)="toggleAttribute('Binder')" tappable>
+          <p class="name">Binder</p>
+          <p class="name">{{ cigar.Attributes?.Binder }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.Filler">
+          <p class="name">Filler</p>
+          <p class="name">{{ cigar.Attributes?.Filler }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.IsSpecific">
+          <p class="name">Is Specific</p>
+          <p class="name">{{ cigar.Attributes?.IsSpecific }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.Length">
+          <p class="name">Length</p>
+          <p class="name">{{ cigar.Attributes?.Length }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.RingGauge">
+          <p class="name">Ring Gauge</p>
+          <p class="name">{{ cigar.Attributes?.RingGauge }}</p>
+        </div>
+        <div class="property" *ngIf="cigar.Attributes?.Section">
+          <p class="name">Section</p>
+          <p class="name">{{ cigar.Attributes?.Section }}</p>
+        </div>
+        <div class="property active" *ngIf="cigar.Attributes?.Shape" (tap)="toggleAttribute('Shape')" tappable>
+          <p class="name">Shape</p>
+          <p class="name">{{ cigar.Attributes?.Shape }}</p>
+        </div>
+        <div class="property active" *ngIf="cigar.Attributes?.SinglePackaging"
+             (tap)="toggleAttribute('SinglePackaging')" tappable>
+          <p class="name">Single Packaging</p>
+          <p class="name">{{ cigar.Attributes?.SinglePackaging }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="shapes" *ngIf="cigar.Shapes.length">
+      <div class="inner-wrapper">
+        <p class="heading">Shapes</p>
+      </div>
+      <div class="shape-wrapper" *ngFor="let shape of cigar.Shapes" [routerLink]="['./shape', shape.Id]">
+        <img
+          *ngIf="shape.ImageOfSingleUrl"
+          class="shape-image"
+          [routerLink]="['./shape', shape.Id]"
+          [src]="shape.ImageOfSingleUrl | createSource"
+          [ngStyle]="{'width': setCigarImageWidth(shape.ImageOfSingleWidth)}"/>
+        <div class="cigar-name">{{ shape.Name }}</div>
+
+        <div class="length-gauge">
+          {{ shape.Attributes?.Shape }} {{ shape.Attributes?.Length }} x {{ shape.Attributes?.RingGauge }}
+        </div>
+
+        <div class="rating">
+          <rating-stars
+            [rating]="shape.RatingSummary?.AverageRating"
+            [size]="15"></rating-stars>
+          <div class="value">Rating: {{ shape.RatingSummary?.AverageRating }}({{ shape.RatingSummary?.RatingCount }})
+          </div>
+        </div>
+
+        <div class="cigar-price-wrapper">
+          <cigar-price
+            [type]="'MSRP'"
+            [cigarPrices]="shape.Prices"
+            [boxQuantityMin]="shape?.MinBoxQty"
+            [boxQuantityMax]="shape?.MaxBoxQty">
+          </cigar-price>
+
+          <cigar-price
+            *ngIf="shape.Prices?.DisplayPartnerPrices == 'Y'"
+            [type]="'Partner price'"
+            [cigarPrices]="shape.PartnerPrices"
+            [boxQuantityMin]="shape?.MinBoxQty"
+            [boxQuantityMax]="shape?.MaxBoxQty">
+          </cigar-price>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="cigar.BandHistory">
+      <div class="brand-history" *ngIf="cigar.BandHistory?.length > 0">
+        <div class="inner-wrapper">
+          <p class="heading">Brand History</p>
+        </div>
+        <div class="inner-wrapper">
+          <ng-container *ngFor="let image of cigar.BandHistory">
+            <img [src]="image.ImageUrl | createSource"/>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-social-posts" *ngIf="cigar.SocialPosts">
+      <div class="inner-wrapper">
+        <p class="heading">Social Posts</p>
+        <div class="section-text" (tap)="showProductPosts()" tappable>View What People are Posting
+          ({{cigar.SocialPosts}} post<span *ngIf="cigar.SocialPosts > 1">s</span>)
+        </div>
+      </div>
+    </div>
+
+    <div class="user-ratings">
+      <div class="inner-wrapper">
+        <p class="heading">User Ratings</p>
+      </div>
+      <div class="inner-wrapper">
+        <div class="rating-group" (tap)="toggleReviews(5)" tappable>
+          <div class="stars-wrapper">
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+          </div>
+          <div class="scale-wrapper">
+            <div class="scale">
+              <div class="fill" [ngStyle]="{ 'width': cigar.RatingSummary?.ratingPercent('Rated5') + '%' }"></div>
+            </div>
+            <p>{{ cigar.RatingSummary?.Rated5 }}</p>
+          </div>
+          <div class="next">
+            <div class="arrow"></div>
+          </div>
+        </div>
+        <div class="rating-group" (tap)="toggleReviews(4)" tappable>
+          <div class="stars-wrapper">
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+          </div>
+          <div class="scale-wrapper">
+            <div class="scale">
+              <div class="fill" [ngStyle]="{ 'width': cigar.RatingSummary?.ratingPercent('Rated4') + '%' }"></div>
+            </div>
+            <p>{{ cigar.RatingSummary?.Rated4 }}</p>
+          </div>
+          <div class="next">
+            <div class="arrow"></div>
+          </div>
+        </div>
+        <div class="rating-group" (tap)="toggleReviews(3)" tappable>
+          <div class="stars-wrapper">
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+          </div>
+          <div class="scale-wrapper">
+            <div class="scale">
+              <div class="fill" [ngStyle]="{ 'width': cigar.RatingSummary?.ratingPercent('Rated3') + '%' }"></div>
+            </div>
+            <p>{{ cigar.RatingSummary?.Rated3 }}</p>
+          </div>
+          <div class="next">
+            <div class="arrow"></div>
+          </div>
+        </div>
+        <div class="rating-group" (tap)="toggleReviews(2)" tappable>
+          <div class="stars-wrapper">
+            <div class="rating-star"></div>
+            <div class="rating-star"></div>
+          </div>
+          <div class="scale-wrapper">
+            <div class="scale">
+              <div class="fill" [ngStyle]="{ 'width': cigar.RatingSummary?.ratingPercent('Rated2') + '%' }"></div>
+            </div>
+            <p>{{ cigar.RatingSummary?.Rated2 }}</p>
+          </div>
+          <div class="next">
+            <div class="arrow"></div>
+          </div>
+        </div>
+        <div class="rating-group" (tap)="toggleReviews(1)" tappable>
+          <div class="stars-wrapper">
+            <div class="rating-star"></div>
+          </div>
+          <div class="scale-wrapper">
+            <div class="scale">
+              <div class="fill" [ngStyle]="{ 'width': cigar.RatingSummary?.ratingPercent('Rated1') + '%' }"></div>
+            </div>
+            <p>{{ cigar.RatingSummary?.Rated1 }}</p>
+          </div>
+          <div class="next">
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="keywords-wrapper" *ngIf="cigar.Tags.length">
+      <p class="heading">Most Used Adjective from User Reviews</p>
+      <div class="keywords">
+        <div class="word" *ngFor="let tag of cigar.Tags" [ngClass]="getTagWeightClass(tag.Weight)">{{ tag.Tag }}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="details-container">
+  <ion-content class="cigar-details-wrapper page-level" [ngClass]="'page-level-' + pageLevel" [pageLevel]="pageLevel">
+    <router-outlet></router-outlet>
+  </ion-content>
+</div>

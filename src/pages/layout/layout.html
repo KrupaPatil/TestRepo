@@ -1,0 +1,206 @@
+<!-- MOBILE -->
+<ion-menu class="mobile-menu" [content]="content" *ngIf="mobile">
+  <ion-content>
+    <div menuToggle routerLink="/login" tappable *ngIf="!activeUserService.isAuthenticated()">
+      <div class="user-logo empty"></div>
+      <div class="user-name empty">Login</div>
+    </div>
+    <div *ngIf="activeUserService.isAuthenticated()">
+      <img *ngIf="activeUserService.user().AvatarUrl" class="user-logo" [src]="activeUserService.user().AvatarUrl | createSource"/>
+      <div *ngIf="!activeUserService.user().AvatarUrl" class="user-logo empty"></div>
+
+      <div class="user-name">{{ activeUserService.user().FirstName }} {{ activeUserService.user().LastName }}</div>
+    </div>
+    <ion-list>
+      <div *ngIf="!activeUserService.isAuthenticated()" class="logout-menu-wrapper">
+        <ion-item>
+          <div class="mobile-menu-icon my-profile"></div>
+          <p>My Profile</p>
+        </ion-item>
+        <ion-item>
+          <div class="mobile-menu-icon notifications"></div>
+          <p>Notification</p>
+        </ion-item>
+      </div>
+      <div *ngIf="activeUserService.isAuthenticated()">
+        <ion-item routerLink="/my-profile" tappable menuToggle>
+          <div class="mobile-menu-icon my-profile"></div>
+          <p>My Profile</p>
+        </ion-item>
+        <ion-item  routerLink="/notifications" tappable menuToggle>
+          <div class="mobile-menu-icon notifications">
+            <div class="number-wrapper new-notifications" *ngIf="notificationNumber">{{notificationNumber}}</div>
+          </div>
+          <p>Notification</p>
+        </ion-item>
+      </div>
+      <ion-item routerLink="/settings" tappable menuToggle>
+        <ion-icon ios="ios-settings" md="ios-settings" name="settings" class="settings-icon"></ion-icon>
+        <p>Settings</p>
+      </ion-item>
+      <ion-item routerLink="/feedback" tappable menuToggle>
+        <div class="mobile-menu-icon feedback"></div>
+        <p>Feedback</p>
+      </ion-item>
+      <ion-item routerLink="/about" tappable menuToggle>
+        <div class="mobile-menu-icon about"></div>
+        <p>About</p>
+      </ion-item>
+      <ion-item routerLink="/rate" tappable menuToggle>
+        <div class="mobile-menu-icon rate"></div>
+        <p>Rate This App</p>
+      </ion-item>
+      <ion-item class="log-out-wrapper" tappable *ngIf="activeUserService.isAuthenticated()" (click)="logout()">
+        <div class="mobile-menu-icon log-out"></div>
+        <p>Log Out</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content #content [hidden]="!mobile">
+  <ion-header *ngIf="layoutConfig.showHeader">
+    <ion-navbar>
+      <button class="hamburger-button" tappable ion-button menuToggle icon-only *ngIf="layoutConfig.showMenuLink && !layoutConfig.showBackLink">
+        <ion-icon name='menu'></ion-icon>
+      </button>
+      <button tappable ion-button backLink icon-only *ngIf="layoutConfig.showBackLink">
+        <ion-icon name='arrow-back'></ion-icon>
+      </button>
+      <button class="manual-back" tappable ion-button icon-only *ngIf="layoutConfig.manualBackButton"(click)="manualBackButton()">
+        <ion-icon name='arrow-back'></ion-icon>
+      </button>
+      <button tappable ion-button icon-only *ngIf="layoutConfig.backToJournal" (click)="backToJournal()">
+        <ion-icon name='arrow-back'></ion-icon>
+      </button>
+      <ion-title>
+        {{ layoutConfig.pageTitle }}
+      </ion-title>
+      <button tappable class="search-icon" aria-label="search cigars" routerLink="/cigar-search" *ngIf="layoutConfig.showSearchProduct"></button>
+      <button tappable class="search-icon user-search" aria-label="search users" routerLink="/social/user-search" *ngIf="layoutConfig.showUserSearch"></button>
+      <button class="clear-notifications-button" tappable (click)="clearAllNotifications()" *ngIf="layoutConfig.clearAllNotifications">Clear All</button>
+      <button class="toggle-posts-button" tappable (click)="selectPostsGroup()" *ngIf="layoutConfig.showSocialPostsGroup">{{getSocialPostsGroup()}}</button>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content class="page-level page-level-0" pageLevel="0">
+    <router-outlet></router-outlet>
+  </ion-content>
+
+  <ion-footer no-border *ngIf="layoutConfig.showFooter">
+    <button class="camera" ion-button (click)="takePicture()"></button>
+    <ion-toolbar>
+      <button ion-button routerLink="/my-cigars" aria-label="my cigars" [routerLinkActive]="['active']">
+        <div class="menu-icon my-cigars"></div>
+        <div class="link-name">my cigars</div>
+      </button>
+      <button ion-button routerLink="/social" aria-label="social page" [routerLinkActive]="['active']">
+        <div class="menu-icon share"></div>
+        <div class="link-name">social</div>
+      </button>
+      <button ion-button class="camera-placeholder-wrapper" aria-label="camera">
+        <div class="menu-icon camera-placeholder"></div>
+      </button>
+      <button ion-button routerLink="/my-humidors" aria-label="my humidors" [routerLinkActive]="['active']">
+        <div class="menu-icon humidors"></div>
+        <div class="link-name">my humidors</div>
+      </button>
+      <button ion-button routerLink="/tools" aria-label="tools" [routerLinkActive]="['active']">
+        <div class="menu-icon more"></div>
+        <div class="link-name">tools</div>
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
+<!-- END MOBILE -->
+
+<!-- DESKTOP -->
+<ion-content *ngIf="!mobile">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="menu-wrapper">
+        <ion-list>
+          <div class="camera-wrapper">
+            <img class="menu-logo" src="../../assets/images/menu-logo.png"/>
+
+            <div *ngIf="!activeUserService.isAuthenticated()" routerLink="/login" [routerLinkActive]="['active']">
+              <div class="user-logo empty"></div>
+              <div class="user-name empty ">Login</div>
+            </div>
+
+            <div *ngIf="activeUserService.isAuthenticated()">
+              <img *ngIf="activeUserService.user().AvatarUrl" class="user-logo" [src]="activeUserService.user().AvatarUrl"/>
+              <div *ngIf="!activeUserService.user().AvatarUrl" class="user-logo empty"></div>
+              <div class="user-name">{{ activeUserService.user().FirstName }} {{ activeUserService.user().LastName }}</div>
+            </div>
+
+            <ion-item class="scan-button" (click)="takePicture()" tappable>
+              <div class="inner-button-wrapper">
+                <div class="menu-icon camera"></div>
+                Scan
+              </div>
+            </ion-item>
+            <ion-item class="search-button" routerLink="/cigar-search" [routerLinkActive]="['active']">
+              <div class="inner-button-wrapper">
+                <div class="menu-icon search"></div>
+                Search
+              </div>
+            </ion-item>
+          </div>
+          <ion-item routerLink="/my-profile" [routerLinkActive]="['active']"
+                    *ngIf="activeUserService.isAuthenticated()">
+            <div class="menu-icon my-profile"></div>
+            My Profile
+          </ion-item>
+          <ion-item routerLink="/my-cigars" [routerLinkActive]="['active']" (click)="closeDetailsPage()" tappable>
+            <div class="menu-icon my-cigars"></div>
+            My Cigars
+          </ion-item>
+          <ion-item routerLink="/notifications" [routerLinkActive]="['active']"
+                    *ngIf="activeUserService.isAuthenticated()">
+            <ion-icon ios="ios-notifications-outline" md="ios-notifications-outline" name="settings" class="settings-icon"></ion-icon>
+            Notifications
+            <span class="badge" *ngIf="notificationNumber">{{notificationNumber}}</span>
+          </ion-item>
+          <ion-item routerLink="/social" [routerLinkActive]="['active']">
+            <div class="menu-icon share"></div>
+            Social
+          </ion-item>
+          <ion-item routerLink="/my-humidors" [routerLinkActive]="['active']">
+            <div class="menu-icon humidors"></div>
+            My Humidors
+          </ion-item>
+          <ion-item routerLink="/tools" [routerLinkActive]="['active']">
+            <div class="menu-icon more"></div>
+            Tools
+          </ion-item>
+          <ion-item routerLink="/settings" [routerLinkActive]="['active']">
+            <ion-icon ios="ios-settings" md="ios-settings" name="settings" class="settings-icon"></ion-icon>
+            Settings
+          </ion-item>
+          <ion-item routerLink="/feedback" [routerLinkActive]="['active']">
+          <ion-icon ios="ios-text-outline" md="ios-text-outline" name="settings" class="settings-icon"></ion-icon>
+          Feedback
+        </ion-item>
+          <ion-item routerLink="/rate" [routerLinkActive]="['active']">
+            <ion-icon ios="ios-star-outline" md="ios-star-outline" name="settings" class="settings-icon"></ion-icon>
+            Rate
+          </ion-item>
+          <ion-item class="desktop-auth-icon" *ngIf="activeUserService.isAuthenticated()" (click)="logout()" tappable>
+            <div class="menu-icon log-out"></div>
+            <p>Log Out</p>
+          </ion-item>
+        </ion-list>
+        <div routerLink="/privacy-policy" class="privacy-policy">Privacy policy</div>
+      </ion-col>
+      <ion-col class="content-wrapper">
+        <router-outlet></router-outlet>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<!-- END DESKTOP -->
+
+<input type="file" accept="image/*" id="capture" capture="camera" #file
+       name="camera" style="visibility: hidden; width: 1px; height: 1px">
+

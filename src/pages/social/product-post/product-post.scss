@@ -1,0 +1,40 @@
+.product-post-wrapper {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: auto;
+  background: #fff;
+
+  .sub-heading {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .post-wrapper {
+    position: relative;
+
+  }
+  .create-post-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 1200px) {
+  .product-post-wrapper {
+    height: calc(100vh - 120px);
+    margin-top: 60px;
+    overflow: auto;
+
+    .sub-heading {
+      display: none;
+    }
+  }
+}
+

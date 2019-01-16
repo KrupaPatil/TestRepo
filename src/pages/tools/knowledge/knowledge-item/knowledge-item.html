@@ -1,0 +1,5 @@
+<div class="knowledge-item">
+  <div class="title">{{item?.Title}}</div>
+  <div *ngIf="item" #itemHtml [innerHTML]="item?.Html" runScripts></div>
+  <a target="_blank" href="http://www.neptunecigar.com">© 1999 - {{currentYear}} NeptuneCigar.Com</a>
+</div>

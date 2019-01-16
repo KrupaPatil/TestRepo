@@ -1,0 +1,9 @@
+<div class="product-post-wrapper">
+  <p class="sub-heading">Share a product from your list</p>
+  <div class="post-wrapper" *ngFor="let cigar of products">
+    <div class="create-post-overlay" (click)="createPost(cigar)"></div>
+    <cigar-info [productPost]="true"
+                [cigar]="cigar">
+    </cigar-info>
+  </div>
+</div>

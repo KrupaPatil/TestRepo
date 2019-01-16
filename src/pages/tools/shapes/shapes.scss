@@ -1,0 +1,55 @@
+.shapes-wrapper {
+
+  .page-name {
+    margin: 50px 0 40px;
+  }
+
+  ion-content.page-level-2 {
+    position: absolute;
+  }
+
+  ion-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .input-wrapper {
+    border-bottom: 1px solid #dfdfdf;
+  }
+
+  ion-item:last-child .input-wrapper {
+    border: 0;
+  }
+
+  ion-label {
+    display: table;
+    width: 100%;
+  }
+
+  .cigar {
+    width: 100%;
+    display: table-cell;
+    padding-left: 10px;
+    vertical-align: middle;
+    background-size: contain;
+    background-position: center left;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  ion-content.page-level-2 {
+    position: fixed !important;
+  }
+
+  .shapes-wrapper {
+    height: calc(100vh - 120px);
+    overflow: auto;
+    margin-top: 60px;
+  }
+
+}
+

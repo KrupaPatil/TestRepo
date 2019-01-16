@@ -1,0 +1,63 @@
+<div class="social-content-holder">
+  <div class="button-group">
+    <div class="back-btn" (click)="backButton()" tappable>Back</div>
+    <button tappable class="user-search" (click)="navigateToUserSearch()"></button>
+    <button class="toggle-posts-button" tappable (click)="selectPostsGroup()">{{getSocialPostsGroup()}}</button>
+  </div>
+
+  <ion-content>
+    <ion-refresher [enabled]="refreshEnabled && layoutConfig.showCreateSocialPostButton" [snapbackDuration]="100" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <div class="social-content-container">
+      <div class="social-page-wrapper"
+           #socialPageWrapper
+           infiniteScroll
+           [scrollWindow]="false"
+           [infiniteScrollDistance]="2"
+           [infiniteScrollThrottle]="500"
+           [ngClass]="{'shrink': showSocialDetails}"
+           (scrolled)="onScroll()">
+        <div class="posts-wrapper" [ngClass]="{'shrink': showCigarDetails}">
+          <social-post *ngFor="let post of posts"
+                       [posts]=posts
+                       [post]=post
+                       [(showSocialDetails)]="showSocialDetails"
+                       [userSocialPosts]="false"
+                       (navigateToProductClicked)="navigateToProduct(post)">
+          </social-post>
+        </div>
+        <div class="loading-message" *ngIf="isLoading">Loading posts...</div>
+      </div>
+      <div class="details-container">
+        <ion-content class="page-level page-level-1" pageLevel="1">
+          <div class="close-details" (tap)="closeDetails()"></div>
+          <router-outlet></router-outlet>
+        </ion-content>
+      </div>
+    </div>
+  </ion-content>
+
+  <ion-fab *ngIf="layoutConfig.showCreateSocialPostButton" right bottom #fab>
+    <button ion-fab class="toggle-menu add-to-humidor-btn">
+      <ion-icon name="md-add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button (tap)="navigateToReviewPost(fab)">
+        <p class="info">Post a Review from your Reviews</p>
+      </button>
+      <button (tap)="navigateToMyDistinctList(fab)">
+        <p class="info">Post a Cigar from your Lists</p>
+      </button>
+      <button (tap)="navigateToCustomPost(fab)">
+        <p class="info">Post what's on your mind</p>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</div>
+<survey *ngIf="showSurvey" [survey]="survey[0]" [(showSurvey)]="showSurvey"></survey>

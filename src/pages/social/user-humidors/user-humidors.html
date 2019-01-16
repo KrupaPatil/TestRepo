@@ -1,0 +1,27 @@
+<div class="user-humidors-wrapper">
+  <div *ngFor="let humidor of humidors">
+    <div class="humidor-name">Humidor name: {{humidor.Name}}</div>
+    <ion-list>
+      <ion-item *ngFor="let cigar of humidor.Cigars">
+        <div class="info-wrapper" (click)="navigateToProduct(cigar.Product)" tappable>
+          <cigar-brand-logo [cigar]="cigar.Product"></cigar-brand-logo>
+          <div class="info">
+            <p class="name">{{ cigar.Product.Name }}</p>
+            <div class="rating-price">
+              <div class="rating" *ngIf="cigar.Product.RatingSummary">
+                <span class="icon-rating"></span>
+                <span class="rating-number">{{cigar.Product.RatingSummary.AverageRating}}<span class="number-of votes">({{cigar.Product.RatingSummary.RatingCount}})</span></span>
+              </div>
+              <div class="price" *ngIf="cigar.Product.Prices">
+                <span class="icon-price"></span>
+                <span *ngIf="cigar.Product.Prices?.SinglePriceMin">${{cigar.Price || cigar.Product.Prices.SinglePriceMin}}</span>
+              </div>
+            </div>
+            <p class="added">added {{cigar.Date | date}}</p>
+            <p class="added" *ngIf="cigar.ModifiedOn">modified on {{cigar.ModifiedOn | date}}</p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>

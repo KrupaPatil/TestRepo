@@ -1,0 +1,120 @@
+survey {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+
+  .survey-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 600px;
+    height: 350px;
+    margin: 0 auto;
+    padding: 10px;
+    background: #fff;
+    border-radius: 15px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+
+  .title {
+    margin-bottom: 60px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .box-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    &.bad {
+      margin-right: 15px;
+      border: 3px solid #969696;
+      .icon {
+        background-position: center -1094px;
+      }
+      p {
+        color: #000;
+      }
+    }
+    &.good {
+      margin-left: 15px;
+      border: 3px solid #ffb806;
+      .icon {
+        background-position: center -1229px;
+      }
+      p {
+        color: #e6594e;
+      }
+    }
+  }
+
+  .icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px;
+    background: url('../assets/images/icons-group.svg') no-repeat;
+    background-size: 100%;
+  }
+
+  .dont-ask {
+    margin-top: 20px;
+    font-size: 16px;
+    color: $cs-red;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.alertCustomCss {
+  background-color: rgba(0, 0, 0, 0.6);
+
+  &.alert-md .alert-button-group {
+    align-items: center;
+
+  }
+  button{
+    margin: 0;
+  }
+
+  &.alert-ios .alert-button {
+    font-weight: normal;
+  }
+}
+
+@media (max-width: 1200px) {
+  survey {
+    .survey-wrapper {
+      width: calc(100% - 20px);
+      max-width: 350px;
+    }
+
+    .box-wrapper .box {
+      width: 40%;
+    }
+  }
+}

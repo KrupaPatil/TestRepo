@@ -1,0 +1,126 @@
+<div class="humidor-add-edit-wrapper">
+
+  <div class="page-name">Humidor Settings</div>
+
+  <form #form="ngForm"
+        (ngSubmit)="submit(form)"
+        novalidate>
+
+    <ion-list class="sensor-wrapper">
+      <ion-title>Humidor Name:</ion-title>
+      <ion-item class="humidor-name-item">
+        <ion-input
+          autocorrect="on"
+          autocomplete="on"
+          type="text"
+          name="humidor-name"
+          [(ngModel)]="humidor.Name"
+          #humidorName="ngModel"
+          required></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!humidorName.valid && (humidorName.touched || form.submitted)">
+        <p *ngIf="humidorName.errors?.required">Field is required</p>
+      </ion-item>
+
+      <div *ngIf="edit">
+        <ion-title>Hygrometer Settings:</ion-title>
+
+        <h5>Sensor Setting:</h5>
+        <div class="pairing-wrapper">
+          <ion-item>
+            <ion-label>MAC address</ion-label>
+            <ion-input
+              name="sensorId"
+              [(ngModel)]="humidor.SensorDeviceId"
+              placeholder="Address"></ion-input>
+          </ion-item>
+        </div>
+
+        <!--<div class="gateway-buttons">-->
+        <!--<button ion-button>Get Status</button>-->
+        <!--<button ion-button>Reboot</button>-->
+        <!--<button ion-button>Turn on LED lights</button>-->
+        <!--</div>-->
+
+        <ion-title>Be Notified if:</ion-title>
+        <ion-item>
+          <ion-label>Humidity goes under:</ion-label>
+          <ion-input type="number"
+                     name="NotifyOnHumidityUnder"
+                     [(ngModel)]="humidor.NotifyOnHumidityUnder"
+                     (ngModelChange)="onValueChange('NotifyOnHumidityUnder')"
+                     placeholder="1-100"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Humidity goes over:</ion-label>
+          <ion-input type="number"
+                     name="NotifyOnHumidityOver"
+                     [(ngModel)]="humidor.NotifyOnHumidityOver"
+                     (ngModelChange)="onValueChange('NotifyOnHumidityOver')"
+                     placeholder="1-100"></ion-input>
+        </ion-item>
+
+        <div class="temp-alert">
+        <ion-item>
+          <ion-label>Temperature goes under:</ion-label>
+          <ion-input class="temp-value"
+                     type="number"
+                     name="NotifyOnTemperatureUnder"
+                     [(ngModel)]="humidor.NotifyOnTemperatureUnder"
+                     (ngModelChange)="onValueChange('NotifyOnTemperatureUnder')"
+                     placeholder="1-100"></ion-input>
+        </ion-item>
+          <span>{{humidor.TemperatureUnit}}</span>
+        </div>
+
+        <div class="temp-alert">
+        <ion-item>
+          <ion-label>Temperature goes over:</ion-label>
+          <ion-input class="temp-value"
+                     type="number"
+                     name="NotifyOnTemperatureOver"
+                     [(ngModel)]="humidor.NotifyOnTemperatureOver"
+                     (ngModelChange)="onValueChange('NotifyOnTemperatureOver')"
+                     placeholder="1-100"></ion-input>
+        </ion-item>
+        <span>{{humidor.TemperatureUnit}}</span>
+      </div>
+
+        <ion-item>
+          <ion-label>Battery Level goes under:</ion-label>
+          <ion-input type="number"
+                     name="NotifyOnBatteryUnder"
+                     [(ngModel)]="humidor.NotifyOnBatteryUnder"
+                     (ngModelChange)="onValueChange('NotifyOnBatteryUnder')"
+                     placeholder="1-100"></ion-input>
+        </ion-item>
+
+        <ion-item class="sudden-change-option">
+          <ion-label>Sudden change of condition (humidor open/close):</ion-label>
+          <ion-toggle name="NotifyOnSuddenConditionChange" [(ngModel)]="humidor.NotifyOnSuddenConditionChange"
+                      color="#dd423e"></ion-toggle>
+        </ion-item>
+      </div>
+      <div class="button-wrapper">
+        <ion-item>
+          <button class="save" type="submit" ion-button>
+            Save
+          </button>
+        </ion-item>
+
+        <ion-item>
+          <button class="cancel" ion-button (click)="cancel()">
+            Cancel
+          </button>
+        </ion-item>
+      </div>
+
+      <ion-item *ngIf="edit" class="delete-wrapper">
+        <ion-icon name="trash"></ion-icon>
+        <div (click)="deleteHumidor()" tappable>Remove humidor</div>
+      </ion-item>
+
+    </ion-list>
+  </form>
+</div>

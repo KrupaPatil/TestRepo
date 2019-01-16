@@ -1,0 +1,63 @@
+<div class="tools-wrapper" [ngClass]="{'survey-active': showSurvey}">
+  <div class="tools-menu-wrapper">
+    <ion-list class="cigar-info">
+      <ion-list-header>
+        Cigar Info
+      </ion-list-header>
+      <ion-item routerLink="/tools/knowledge" tappable>
+        <div class="icon info"></div>
+        <div>Cigar 101</div>
+      </ion-item>
+      <ion-item [hidden]="hideOnIosUntilDate()" routerLink="/tools/places" tappable>
+        <div class="icon places"></div>
+        Cigar Places
+      </ion-item>
+      <ion-item routerLink="/tools/shapes" tappable>
+        <div class="icon shapes"></div>
+        Cigar Shapes
+      </ion-item>
+      <ion-item routerLink="/tools/wrapper-color" tappable>
+        <div class="icon wrapper-colors"></div>
+        Wrapper Colors
+      </ion-item>
+      <ion-item routerLink="/tools/ring-gauge" tappable>
+        <div class="icon ring-gauge"></div>
+        Ring Gauge Tool
+      </ion-item>
+    </ion-list>
+
+    <div class="right-menus">
+      <ion-list class="top-cigars">
+        <ion-list-header>
+          Top Cigars
+        </ion-list-header>
+        <ion-item routerLink="/tools/top-rated" tappable>
+          <div class="icon top-rated"></div>
+          Top Rated Cigars
+        </ion-item>
+        <ion-item routerLink="/tools/top-scanned" tappable>
+          <div class="icon top-scanned"></div>
+          Top Scanned Cigars
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="cigar-scanner">
+        <ion-list-header>
+          Cigar Scanner <span>{{appVersion}}</span>
+        </ion-list-header>
+        <ion-item routerLink="/tools/feedback" tappable>
+          <div class="icon feedback"></div>
+          Feedback
+        </ion-item>
+        <ion-item routerLink="/tools/about" tappable>
+          <div class="icon about"></div>
+          About
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  <ion-content class="page-level page-level-1" pageLevel="1">
+    <router-outlet></router-outlet>
+  </ion-content>
+</div>
+<survey *ngIf="showSurvey" [survey]="survey[0]" [(showSurvey)]="showSurvey"></survey>

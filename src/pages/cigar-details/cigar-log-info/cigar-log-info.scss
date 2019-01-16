@@ -1,0 +1,72 @@
+.cigar-log-info {
+  margin: 100px auto 0;
+
+  .sub-heading {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  ion-label {
+    justify-content: space-between;
+  }
+
+  .set-image {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+    color: $cs-red;
+    text-decoration: underline;
+    span {
+      white-space:pre;
+    }
+  }
+
+  .cigar-preview {
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    &.no-image {
+      height: auto;
+    }
+  }
+
+  .save {
+    padding: 0;
+    margin: 20px auto 0 !important;
+
+    .label {
+      margin: 0 auto;
+    }
+
+    div.item-inner {
+      background-image: none;
+      padding: 0;
+    }
+
+    .input-wrapper {
+      margin: 0 auto;
+      flex: none;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .cigar-log-info {
+    width: 85%;
+    margin: 60px auto 65px;
+
+    .sub-heading {
+      display: none;
+    }
+
+    .cigar-preview {
+
+      .label {
+        margin: 0;
+      }
+    }
+  }
+}

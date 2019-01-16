@@ -1,0 +1,9 @@
+<div class="user-posts-wrapper">
+  <div class="header">User social posts</div>
+  <social-post *ngFor="let post of posts"
+               [posts]=posts
+               [post]=post
+               [userSocialPosts]="true"
+               (navigateToProductClicked)="navigateToProduct(post)">
+  </social-post>
+</div>

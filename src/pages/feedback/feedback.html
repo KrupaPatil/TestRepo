@@ -1,0 +1,70 @@
+<div class="feedback-wrapper">
+  <div class="page-name" [ngClass]="{ 'from-survey': isFromSurvey }">Feedback</div>
+  <p class="survey-info" *ngIf="isFromSurvey">
+    We're sorry to hear you're disappointed with Cigar Scanner. Please let us know what we can do to improve!
+  </p>
+  <div class="login-input-wrapper" *ngIf="!isSubmitted">
+    <ion-list>
+      <form #form="ngForm" (ngSubmit)="submit(form.valid)" novalidate>
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Name"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="feedbackData.Name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            type="email"
+            placeholder="Email"
+            name="email"
+            #email="ngModel"
+            email
+            [(ngModel)]="feedbackData.Email"
+            [required]="activeUserService.isAuthenticated() ? null : true"
+            ></ion-input>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!email.valid && (email.touched || form.submitted)">
+          <p class="warning-message" *ngIf="email.errors?.required">Field is required</p>
+          <p class="warning-message" *ngIf="email.errors?.email && !email.errors?.required">Invalid Email</p>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Subject"
+            name="subject"
+            #subject="ngModel"
+            autocorrect="on"
+            autocomplete="on"
+            [(ngModel)]="feedbackData.Subject"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-textarea
+            type="text"
+            autocorrect="on"
+            autocomplete="on"
+            placeholder="Your Feedback"
+            name="text"
+            #text="ngModel"
+            [(ngModel)]="feedbackData.Text" required></ion-textarea>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!text.valid && (text.touched || form.submitted)">
+          <p class="warning-message" *ngIf="text.errors?.required">Field is required</p>
+        </div>
+        <button type="submit" ion-button>
+          Submit
+        </button>
+      </form>
+    </ion-list>
+
+  </div>
+  <div class="confirmation" *ngIf="isSubmitted">
+    <div class="check"></div>
+    <p>Thank you for your feedback!</p>
+  </div>
+</div>
+

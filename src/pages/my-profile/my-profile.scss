@@ -1,0 +1,157 @@
+.my-profile-wrapper {
+  width: 60%;
+  margin: 50px auto 0;
+
+  .picture-wrapper {
+    text-align: center;
+
+    a {
+      display: block;
+      margin-bottom: 30px;
+      text-decoration: underline;
+      font-size: 16px;
+    }
+  }
+
+  .crop-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    z-index: 1;
+
+    .buttons-wrapper {
+      display: flex;
+      width: 700px;
+      justify-content: space-between;
+    }
+
+    .upload-button {
+      width: 40px;
+      height: 30px;
+      background: url('../assets/images/icons-group.svg') center -370px no-repeat;
+      background-size: 36px;
+      padding: 0;
+    }
+
+    .cancel-button {
+      background: none;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 35px;
+        height: 4px;
+        border-radius: 15px;
+        background-color: #5D5D5D;
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 35px;
+        height: 4px;
+        border-radius: 15px;
+        background-color: #5D5D5D;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .user-photo {
+    width: 100px;
+    height: 100px;
+    margin: 25px 0 15px;
+    border-radius: 50%;
+  }
+
+  .item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+  .item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+  .item-input.input-has-focus .item-inner {
+    box-shadow: none;
+    border: none;
+  }
+
+  ion-label.label {
+    margin: 0;
+  }
+
+  ion-input {
+    color: #000;
+    &.ng-invalid.ng-dirty,
+    &.ng-invalid.ng-touched {
+      border-bottom-color: #f53d3d;
+    }
+  }
+
+  .change-password {
+    display: flex;
+    align-self: flex-end;
+    text-decoration: underline;
+    font-size: 16px;
+  }
+
+  .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child,
+  .list-md .item-input,
+  .list-md .item-input.input-has-focus:last-child{
+    border: 0;
+    box-shadow: none;
+  }
+
+  .warning-wrapper {
+    position: relative;
+
+    .warning-message {
+      position: absolute;
+      top: -11px;
+      right: 0;
+      margin: 0;
+      color: $cs-red;
+      z-index: 1;
+    }
+  }
+
+  .button-wrapper {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  button[type="submit"]:hover {
+    background: $cs-red;
+    color: #fff;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  ion-header .toolbar-content-md {
+    display: flex;
+  }
+
+  .my-profile-wrapper {
+    width: auto;
+    margin: 55px auto auto;
+
+    .button-wrapper {
+      width: 100%;
+    }
+
+    ion-list {
+      margin: 0 20px;
+      padding: 0;
+    }
+    .crop-wrapper {
+      .buttons-wrapper {
+        width: 100%;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,45 @@
+<div class="no-results-wrapper">
+  <div class="back-btn" (click)="backButton()" tappable>Back</div>
+  <div *ngIf="!manualEntryMode && !recognitionReceived">
+    <div class="page-name">Scan result</div>
+    <div class="content-wrapper">
+      <div class="info">
+        <img [src]="scanLog.cigarImageUrl" alt="">
+        <div class="text">
+          <h1>Oups, We couldn't recognize your cigar!</h1>
+          <p>We suggest you to also try to search your cigar by name using the button below.
+            Image recognition may fail for different reasons but we may have your cigar in our database.
+            <span *ngIf="dataSummary">We currently carry <span>{{dataSummary.Products}}</span> cigars in our database!</span>
+          </p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="buttons-wrapper">
+        <button class="ask-team" (click)="requestManualRecognition()">
+          <ion-icon name="ios-people"></ion-icon>
+          Ask Our Team To Recognize It
+        </button>
+        <div class="action-button-wrapper">
+          <button (click)="takePicture()"><span class="retake-icon"></span><p>Retake Picture</p></button>
+          <button (click)="manualEntry()"><span class="manual-icon"></span><p>Search by Name</p></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="manualEntryMode" class="manual-entry-wrapper">
+    <cigar-search (resultClick)="onResultClick($event)" [searchJournal]="false"></cigar-search>
+  </div>
+
+  <div *ngIf="recognitionReceived" class="recognition-received-wrapper">
+    <div class="page-name">Manual Recognition Received</div>
+    <div class="info-wrapper">
+      <img src="assets/images/manual-recognition.png"/>
+      <div>
+        <p>Our team of experts will now take a look at your picture.</p>
+        <p>You'll get notified once they identify your cigar. Make sure you allow Cigar Scanner to send you
+          notifications.</p>
+      </div>
+    </div>
+  </div>
+</div>

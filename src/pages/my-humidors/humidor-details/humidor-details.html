@@ -1,0 +1,99 @@
+<div class="humidor-details-holder">
+  <div class="humidor-details-container">
+    <div class="humidor-details-wrapper" [ngClass]="{'shrink': showCigarDetails}"  [ngStyle]="{'overflow': showAddButtons ? 'hidden' : null}">
+      <div class="humidor-info">
+        <div class="back-btn" (click)="backButton()" tappable>Back</div>
+        <p>
+          <ion-icon name="logo-usd"></ion-icon>
+          {{ humidor.totalPrice() }} ({{ humidor.getTotalNumberOfCigars() }} cigars)
+        </p>
+        <p *ngIf="humidor.CreatedOn">
+          <ion-icon name="md-time"></ion-icon>
+          Created on {{humidor.CreatedOn | date}}
+        </p>
+
+      </div>
+      <div class="sort-buttons-wrapper">
+        <button [ngClass]="{'active': this.sortCriteria == 'date'}" ion-button (tap)="sortCigarsInHumidor('date')">Date
+          <ion-icon *ngIf="this.sortCriteria == 'date' && !this.sortDirection" name="arrow-round-up"></ion-icon>
+          <ion-icon *ngIf="this.sortCriteria == 'date' && this.sortDirection" name="arrow-round-down"></ion-icon>
+        </button>
+        <button [ngClass]="{'active': this.sortCriteria == 'name'}" ion-button (tap)="sortCigarsInHumidor('name')">Name
+          <ion-icon *ngIf="this.sortCriteria == 'name' && !this.sortDirection" name="arrow-round-up"></ion-icon>
+          <ion-icon *ngIf="this.sortCriteria == 'name' && this.sortDirection" name="arrow-round-down"></ion-icon>
+        </button>
+        <button [ngClass]="{'active': this.sortCriteria == 'avg-rating'}" ion-button (tap)="sortCigarsInHumidor('avg-rating')">Avg Rating
+          <ion-icon *ngIf="this.sortCriteria == 'avg-rating' && !this.sortDirection" name="arrow-round-up"></ion-icon>
+          <ion-icon *ngIf="this.sortCriteria == 'avg-rating' && this.sortDirection" name="arrow-round-down"></ion-icon>
+        </button>
+        <button [ngClass]="{'active': this.sortCriteria == 'my-rating'}" ion-button (tap)="sortCigarsInHumidor('my-rating')">My Rating
+          <ion-icon *ngIf="this.sortCriteria == 'my-rating' && !this.sortDirection" name="arrow-round-up"></ion-icon>
+          <ion-icon *ngIf="this.sortCriteria == 'my-rating' && this.sortDirection" name="arrow-round-down"></ion-icon>
+        </button>
+      </div>
+
+      <img *ngIf="!humidor.Cigars || !humidor.Cigars.length" class="cigars-image" src="assets/images/humidor-details-cigar.svg"/>
+      <p *ngIf="!humidor.Cigars || !humidor.Cigars.length" class="usage">Add cigars to your humidor by tapping the
+        <ion-icon name="md-add-circle"></ion-icon>
+        button
+      </p>
+      <ion-list>
+        <ion-item *ngFor="let cigar of humidor.Cigars; index as i">
+          <div class="info-wrapper" (tap)="toggleDetails(cigar)" tappable>
+            <cigar-brand-logo [cigar]="cigar.Product"></cigar-brand-logo>
+            <div class="info">
+              <p class="name">{{ cigar.Product.Name }}</p>
+              <div class="rating-price">
+                <div class="rating" *ngIf="cigar.Product.RatingSummary">
+                  <span class="icon-rating"></span>
+                  <span class="rating-number">{{cigar.Product.RatingSummary.AverageRating}}<span class="number-of votes">({{cigar.Product.RatingSummary.RatingCount}})</span></span>
+                </div>
+                <div class="price" *ngIf="cigar.Product.Prices">
+                  <span class="icon-price"></span>
+                  <span>${{cigar.Price || cigar.Product.Prices.SinglePriceMin}}</span>
+                </div>
+              </div>
+              <p class="added">added {{cigar.Date | date}}</p>
+              <p class="added" *ngIf="cigar.ModifiedOn">modified on {{cigar.ModifiedOn | date}}</p>
+            </div>
+          </div>
+          <div class="button-wrapper">
+            <button *ngIf="cigar.Quantity > 0" (tap)="decreaseProductCount(cigar)">
+              <ion-icon name="remove"></ion-icon>
+            </button>
+            <button *ngIf="cigar.Quantity <= 0" (tap)="deleteCigar(cigar)">
+              <ion-icon name="ios-trash"></ion-icon>
+            </button>
+              <input class="value" type="number" id="{{i}}" [(ngModel)]="cigar.Quantity" (focusout)="checkIfFalseValue(cigar.Quantity, i)">
+            <button (tap)="increaseProductCount(cigar)">
+              <ion-icon name="md-add"></ion-icon>
+            </button>
+          </div>
+        </ion-item>
+
+      </ion-list>
+      <div *ngIf="showAddButtons" class="overlay"></div>
+    </div>
+    <div class="details-container">
+      <ion-content class="cigar-details-wrapper page-level" [ngClass]="'page-level-' + pageLevel" [pageLevel]="pageLevel">
+        <router-outlet></router-outlet>
+      </ion-content>
+    </div>
+  </div>
+
+  <ion-fab right bottom [hidden]="showCigarDetails" *ngIf="showPlusButton">
+    <button ion-fab class="toggle-menu add-to-humidor-btn" (tap)="toggleMenu()">
+      <ion-icon name="md-add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button (tap)="takePicture()">
+        <p class="info">Add from camera</p>
+        <p class="camera-icon"></p>
+      </button>
+      <button [routerLink]="'/my-humidors/' + humidor.Id + '/add-cigar-from-search'">
+        <p class="info">Add from search</p>
+        <p class="search-icon"></p>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</div>

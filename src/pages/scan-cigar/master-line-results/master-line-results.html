@@ -1,0 +1,53 @@
+<div class="master-line-wrapper">
+  <div class="back-btn" (click)="backButton()" tappable>Back</div>
+  <div class="page-name">Scan result</div>
+  <div class="master-line-inner-wrapper">
+    <div class="masterline-heading" *ngIf="!humidor">We believe you just scanned this cigar:</div>
+    <div class="results-wrapper" *ngIf="!humidor">
+      <cigar-info [cigar]="scanLog.data"
+                  [selected]="scanLog.data.Id == idOfCurrentCigarViewed"
+                  (cigarClicked)="addCigarToJournal(scanLog.data)">
+      </cigar-info>
+    </div>
+    <div class="masterline-heading humidor-add" *ngIf="humidor">We believe you just scanned a <span>{{scanLog.data.Name}}</span>,
+      but you need to pick a shape to add it to your humidor...
+    </div>
+
+    <div class="results-wrapper" *ngIf="humidor">
+      <div class="heading-image" [style.background-image]="'url('+scanLog.data.ImageUrl+')'"></div>
+      <cigar-info *ngFor="let cigar of scanLog.data.Shapes"
+                  [cigar]="cigar"
+                  [selected]="cigar.Id == idOfCurrentCigarViewed"
+                  (cigarClicked)="addCigarToHumidor(cigar)">
+      </cigar-info>
+    </div>
+
+    <div class="masterline-heading" *ngIf="scanLog.data.RelatedLines.length || lines?.length">...But it can also be one
+      of those:
+    </div>
+
+    <div class="results-wrapper" *ngIf="!humidor">
+      <cigar-info *ngFor="let cigar of scanLog.data.RelatedLines"
+                  [cigar]="cigar"
+                  [selected]="cigar.Id == idOfCurrentCigarViewed"
+                  (cigarClicked)="addCigarToJournal(cigar)">
+      </cigar-info>
+    </div>
+    <div class="results-wrapper" *ngIf="humidor">
+      <div *ngFor="let line of lines">
+        <div class="heading-image" [style.background-image]="'url('+line.ImageUrl+')'"></div>
+        <cigar-info *ngFor="let cigar of line.Shapes"
+                    [cigar]="cigar"
+                    [selected]="cigar.Id == idOfCurrentCigarViewed"
+                    (cigarClicked)="addCigarToHumidor(cigar)">
+        </cigar-info>
+      </div>
+    </div>
+  </div>
+  <div class="details-container">
+    <ion-content class="cigar-details-wrapper page-level page-level-2" pageLevel="2">
+      <router-outlet></router-outlet>
+    </ion-content>
+  </div>
+
+</div>

@@ -1,0 +1,37 @@
+<div class="cigar-log-info">
+  <p class="sub-heading">Edit Info:</p>
+  <form #form="ngForm" (ngSubmit)="submit()" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Location</ion-label>
+        <ion-input autocorrect="on"
+                   autocomplete="on"
+                   type="text"
+                   name="cigarLocation"
+                   [(ngModel)]="cigarLocation">
+
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Price</ion-label>
+        <ion-input type="number" name="cigarPrice" [(ngModel)]="cigarPrice"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date added:</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="cigarDate" name="time"></ion-datetime>
+      </ion-item>
+      <ion-item class="cigar-preview"
+           [ngStyle]="{'background-image': setBackgroundImageUrl(),
+                   'background-color': backgroundImageUrl ? '#000' : '',
+                   'background-size': backgroundImageUrl ? '150%' : '',
+                   'height': setBackgroundImageHeight()
+                   }">
+      </ion-item>
+      <ion-item class="set-image" (click)="takePicture()" tappable>
+        Add/Update<span *ngIf="backgroundImageUrl"> this </span> Cigar Picture</ion-item>
+        <button class="save" type="submit" ion-item>
+          Save
+        </button>
+    </ion-list>
+  </form>
+</div>

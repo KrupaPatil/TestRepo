@@ -1,0 +1,136 @@
+<div class="my-profile-wrapper">
+
+  <div [hidden]="!showCropper" class="crop-wrapper">
+    <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+    <div class="buttons-wrapper">
+      <button class="cancel-button" (click)="cancelAvatarChange()"></button>
+      <button class="upload-button" (click)="submitImage()"></button>
+    </div>
+  </div>
+
+
+  <div class="picture-wrapper">
+    <img *ngIf="userData.AvatarUrl" [src]="userData.AvatarUrl | createSource" class="user-photo"/>
+    <img *ngIf="!userData.AvatarUrl" src="assets/images/user-image.png" class="user-photo">
+    <a (click)="takePicture()" tappable>Change Photo</a>
+
+  </div>
+
+  <form #form="ngForm"
+        (ngSubmit)="submit(form)"
+        novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="First Name *"
+          name="first-name"
+          [(ngModel)]="userData.FirstName"
+          #firstName="ngModel"
+          required></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!firstName.valid && (firstName.touched || form.submitted)">
+        <p class="warning-message" *ngIf="firstName.errors?.required">Field is required</p>
+      </div>
+
+      <ion-item>
+        <ion-input
+          type="text"
+          placeholder="Last Name *"
+          name="last-name"
+          [(ngModel)]="userData.LastName"
+          #lastName="ngModel"
+          required></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!lastName.valid && (lastName.touched || form.submitted)">
+        <p class="warning-message" *ngIf="lastName.errors?.required">Field is required</p>
+      </div>
+
+      <ion-item>
+        <ion-input
+          autocorrect="on"
+          autocomplete="on"
+          type="text"
+          placeholder="Nickname"
+          name="nick-name"
+          [(ngModel)]="userData.Nickname"
+          #nickName="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="email"
+          placeholder="Email *"
+          name="email"
+          [(ngModel)]="userData.Email"
+          #email="ngModel"
+          required
+          email></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="!email.valid && (email.touched || form.submitted)">
+        <p class="warning-message" *ngIf="email.errors?.required">Field is required</p>
+        <p class="warning-message" *ngIf="email.errors?.email">Invalid Email</p>
+      </div>
+
+      <ion-item *ngIf="!changePassword">
+        <a class="change-password" (click)="changePassword = true" tappable>Change Password</a>
+      </ion-item>
+
+      <div *ngIf="changePassword">
+        <ion-item>
+          <ion-input
+            type="password"
+            name="password"
+            placeholder="Original Password *"
+            [(ngModel)]="userData.Password"
+            #password="ngModel"
+            required></ion-input>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!password.valid && (password.touched || form.submitted)">
+          <p class="warning-message" *ngIf="password.errors?.required">Field is required</p>
+          <p class="warning-message" *ngIf="password.errors?.minlength">Minimum 6 characters</p>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="password"
+            name="new-password"
+            placeholder="New Password *"
+            [(ngModel)]="userData.NewPassword"
+            #newPassword="ngModel"
+            required
+            [minlength]="6"></ion-input>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!newPassword.valid && (newPassword.touched || form.submitted)">
+          <p class="warning-message" *ngIf="newPassword.errors?.required">Field is required</p>
+          <p class="warning-message" *ngIf="newPassword.errors?.minlength">Minimum 6 characters</p>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="password"
+            name="new-password-confirmation"
+            placeholder="Confirm New Password *"
+            [(ngModel)]="userData.NewPasswordConfirmation"
+            #newPasswordConfirmation="ngModel"
+            required
+            [minlength]="6"
+            [equalTo]="newPassword"></ion-input>
+        </ion-item>
+        <div class="warning-wrapper"
+             *ngIf="!newPasswordConfirmation.valid && (newPasswordConfirmation.touched || form.submitted)">
+          <p class="warning-message" *ngIf="newPasswordConfirmation.errors?.required">Field is required</p>
+          <p class="warning-message"
+             *ngIf="newPasswordConfirmation.errors?.equalTo && !newPasswordConfirmation.errors?.required">Passwords
+            don't match</p>
+        </div>
+      </div>
+
+      <ion-item class="button-wrapper">
+        <button type="submit" ion-button>
+          Update My Profile
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+</div>

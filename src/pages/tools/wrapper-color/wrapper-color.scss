@@ -1,0 +1,64 @@
+wrapper-color {
+
+  .wrapper-color-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+
+    div {
+      position: relative;
+      flex-grow: 1;
+
+      p {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  .color-oscuro {
+    @include linear-gradient(#462921, #3B2420);
+  }
+
+  .color-maduro {
+    @include linear-gradient(#3B2420, #58392D);
+  }
+
+  .color-colorado-maduro {
+    @include linear-gradient(#58392D, #7F4C3C);
+  }
+
+  .color-colorado {
+    @include linear-gradient(#7F4C3C, #8F5237);
+  }
+
+  .color-colorado-claro {
+    @include linear-gradient(#8F5237, #A9733D);
+  }
+
+  .color-claro {
+    @include linear-gradient(#A9733D, #B69747);
+  }
+
+  .color-double-claro {
+    @include linear-gradient(#B69747, #A39E44);
+  }
+}
+
+@media (max-width: 1200px) {
+
+  wrapper-color {
+    div.wrapper-color-container {
+      height: calc(100% - 116px);
+      margin-top: 56px;
+    }
+  }
+
+}

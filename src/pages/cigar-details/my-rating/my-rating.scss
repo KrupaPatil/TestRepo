@@ -1,0 +1,73 @@
+.my-rating-wrapper {
+  margin: 100px auto 0;
+
+  .sub-heading {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  ion-label {
+    justify-content: space-between;
+  }
+
+  rating-stars {
+    //margin: 0 auto;
+  }
+
+  .add-margin {
+    margin-bottom: 30px;
+  }
+
+  ion-textarea {
+    height: 100px;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+    color: #000;
+    font-size: 14px;
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      resize: none;
+    }
+  }
+
+  ion-textarea textarea::placeholder {
+    color: #cecece;
+  }
+
+  ion-textarea.ng-invalid.ng-dirty, ion-textarea.ng-invalid.ng-touched {
+    border-bottom-color: #f53d3d;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .my-rating-wrapper {
+    width: 85%;
+    margin: 70px auto 30px;
+    overflow: scroll;
+
+    ion-label {
+      margin: 10px 0;
+    }
+
+    ion-textarea {
+      height: 150px;
+      margin-bottom: 7px;
+
+    }
+
+    .input-wrapper button {
+      margin: 0 0 50px !important;
+    }
+
+    .page-name {
+      display: none;
+    }
+  }
+}

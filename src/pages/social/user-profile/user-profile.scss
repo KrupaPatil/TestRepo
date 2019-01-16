@@ -1,0 +1,124 @@
+.user-profile-wrapper {
+  overflow: auto;
+  height: 100%;
+  background: #fff;
+
+  .inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nickname {
+    margin: 50px 0;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .follow {
+    height: 100%;
+    line-height: 30px;
+    font-size: 16px;
+    color: #A7A7A7;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    ion-icon {
+      font-size: 24px;
+      margin-right: 10px;
+
+      &.following {
+        color: #dd433f;
+      }
+    }
+  }
+
+  .user-image {
+    width: 60px;
+    margin-right: 10px;
+    border-radius: 8px;
+    align-self: center;
+    &.custom {
+      cursor: pointer;
+    }
+  }
+
+  .user-info-wrapper {
+    display: flex;
+    padding: 20px 15px;
+    border-top: 1px solid #ECECEC;
+    border-bottom: 1px solid #ECECEC;
+
+    img {
+      width: 60px;
+      margin-right: 10px;
+      border-radius: 8px;
+      align-self: center;
+    }
+  }
+
+  .user-info {
+    width: 250px;
+  }
+
+  .name-wrapper {
+    display: flex;
+    flex-direction: column;
+    span {
+      margin: 4px 0;
+      color: #A7A7A7;
+    }
+  }
+
+  .social-part-wrapper {
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .user-data {
+    > div {
+      position: relative;
+      width: 100%;
+      display: flex;
+      border-bottom: 1px solid #ECECEC;
+      padding-left: 20px;
+      line-height: 50px;
+      font-size: 16px;
+      color: #A7A7A7;
+      cursor: pointer;
+      &:after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 12px);
+        right: 20px;
+        width: 16px;
+        height: 24px;
+        background: url('../assets/images/cigar-info-icons.svg') no-repeat;
+        background-position: -4px -140px;
+        background-size: 26px;
+      }
+    }
+  }
+
+  .user-page-holder {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .user-profile-wrapper {
+    margin: 60px 0;
+    height: calc(100% - 120px);
+
+    .nickname {
+      margin: 20px 0;
+    }
+  }
+}

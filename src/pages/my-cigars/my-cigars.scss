@@ -1,0 +1,259 @@
+my-cigars {
+  height: 100%;
+  display: flex;
+
+  .my-cigars {
+    position: relative;
+
+    ion-list {
+      height: calc(100vh - 115px);
+      margin: 0 0 5px;
+      overflow: auto;
+    }
+  }
+
+  virtual-scroll {
+    display: block;
+    height: calc(100vh - 110px);
+  }
+}
+
+page-cigar-search {
+  height: 100%;
+  display: flex;
+}
+
+.cigars-container {
+  height: 100%;
+  width: 200%;
+  display: flex;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.cigar-outer-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.cigar-list-wrapper {
+  width: 50%;
+  overflow: auto;
+  transition: width 0.25s ease-out;
+  &.shrink {
+    width: 25%;
+
+    ion-item.cigar {
+      .item-inner {
+        padding: 0 !important;
+      }
+      &.selected {
+        background: #ececec;
+
+      }
+    }
+
+    .price-type {
+      //opacity: 0;
+      //transition: opacity 0.25s ease-out;
+    }
+
+    .market-price-wrapper div,
+    .partner-price-wrapper div {
+      padding-right: 12px;
+    }
+  }
+}
+
+.details-container {
+  width: 25%;
+  overflow: auto;
+  transition: transform 0.25s;
+}
+
+.tab-wrapper {
+  width: 440px;
+  margin: 0 auto;
+  flex: none;
+  ion-segment-button.segment-button {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 3px solid transparent;
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+
+  .total-list-number {
+    font-size: 16px;
+  }
+}
+
+.sort-buttons-wrapper {
+  height: 50px;
+  display: flex;
+  //margin-bottom: 27px;
+  justify-content: center;
+  align-items: center;
+  background: #f3f3f3;
+  ion-icon {
+    margin-left: 5px;
+  }
+}
+
+button[ion-button] {
+  background: none;
+  box-shadow: none;
+  border: 0;
+  color: #000;
+  text-transform: capitalize;
+  &:hover {
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #000;
+  }
+
+  &.active {
+    color: red;
+  }
+}
+
+.button-md:hover:not(.disable-hover),
+.button-md.activated {
+  background: transparent;
+  box-shadow: none;
+}
+
+.cigar-details-wrapper {
+  .scroll-content {
+    position: static;
+    display: initial;
+  }
+  &.absolute {
+    position: absolute;
+  }
+}
+
+.load-more {
+  display: table;
+  margin: 30px auto 30px;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid $cs-red;
+  border-radius: 3px;
+  font-size: 16px;
+  color: $cs-red;
+  transition: all 0.25s;
+  cursor: pointer;
+  &:hover {
+    background: $cs-red;
+    color: #fff;
+  }
+}
+
+@media (max-width: 1200px) {
+  my-cigars .my-cigars {
+    margin: 99px 0 60px;
+    cigar-info:nth-child(2) {
+      ion-item-sliding {
+        margin-top: 0;
+      }
+    }
+
+    ion-list {
+      height: calc(100vh - 199px);
+      margin: 0;
+      padding: 0;
+      &.list-ios {
+        .load-more {
+          margin: 15px auto;
+        }
+      }
+    }
+
+    virtual-scroll {
+      display: block;
+      height: calc(100vh - 20px);
+    }
+  }
+
+  .details-container {
+    overflow: initial;
+  }
+
+  .my-cigars ion-list {
+    background: #F3F3F3;
+  }
+
+  .sort-buttons-wrapper {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    border-bottom: 1px solid #ececec;
+    background: #fff;
+    z-index: 2;
+    button[ion-button] {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid #ececec;
+      border-right: 1px solid #ececec;
+      border-radius: 0;
+      font-size: 14px;
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+  }
+
+  .scroll-content {
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 450px) {
+  div.tab-wrapper {
+    .total-list-number {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  div.tab-wrapper {
+    ion-segment-button.segment-button {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .sort-buttons-wrapper {
+    ion-icon {
+      margin-left: 1px;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .rating {
+    align-items: center;
+  }
+
+  .cigar-list-wrapper {
+    height: 100vh;
+    //overflow: hidden;
+  }
+}
+
+@supports (-ms-ime-align:auto) {
+  .cigar-list-wrapper.shrink {
+    overflow-x: hidden;
+  }
+
+  .cigar-list-wrapper {
+    height: 100vh;
+  }
+}

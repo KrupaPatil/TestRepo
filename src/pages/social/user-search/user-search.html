@@ -1,0 +1,10 @@
+<div class="user-search-wrapper">
+  <input #searchInput class="search-input" type="text" [(ngModel)]="userSearchResource.term" placeholder="Search users">
+  <div class="results-wrapper">
+    <ion-spinner *ngIf="loading"></ion-spinner>
+    <user-list-item [list]="userSearchResource.result" [follows]="true"></user-list-item>
+      <div *ngIf="showLoadMore">
+        <button class="load-more" (click)="userSearch()">Load more</button>
+      </div>
+  </div>
+</div>

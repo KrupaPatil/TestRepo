@@ -1,0 +1,178 @@
+.login-wrapper,
+.forgot-password-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  min-height: 595px;
+  margin: 0 auto;
+  border: 1px solid #969696;
+  transform: translateX(-50%) translateY(-55%);
+
+  .back-btn {
+    display: none;
+  }
+}
+
+.logo-holder {
+  width: 100%;
+  height: 200px;
+  background: rgb(177, 42, 40);
+  background: -moz-linear-gradient(left, rgba(177, 42, 40, 1) 0%, rgba(197, 53, 50, 1) 27%, rgba(197, 53, 50, 1) 74%, rgba(175, 41, 39, 1) 100%);
+  background: -webkit-linear-gradient(left, rgba(177, 42, 40, 1) 0%, rgba(197, 53, 50, 1) 27%, rgba(197, 53, 50, 1) 74%, rgba(175, 41, 39, 1) 100%);
+  background: linear-gradient(to right, rgba(177, 42, 40, 1) 0%, rgba(197, 53, 50, 1) 27%, rgba(197, 53, 50, 1) 74%, rgba(175, 41, 39, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b12a28', endColorstr='#af2927', GradientType=1);
+
+  .logo {
+    position: relative;
+    top: 50%;
+    width: 180px;
+    height: 130px;
+    margin: 0 auto;
+    background: url("../assets/images/login-logo.png") center no-repeat;
+    background-size: cover;
+    transform: translateY(-50%);
+  }
+
+}
+
+form {
+  text-align: center;
+}
+
+.login-wrapper ion-segment.login-tabs ion-segment-button {
+  height: 50px;
+  line-height: 50px;
+  background: #f3f3f3;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  color: #969696;
+  opacity: 1;
+  text-transform: capitalize;
+
+  &.segment-activated {
+    background: #fff;
+    color: $cs-red;
+  }
+}
+
+ion-input {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #969696;
+  color: #969696;
+
+  input::placeholder {
+    color: #cecece !important;
+  }
+}
+
+.forgot-password {
+  margin: 0 20px 20px 0;
+  text-align: right;
+  text-transform: capitalize;
+  color: $cs-red;
+}
+
+
+  .login-input-wrapper {
+    padding-bottom: 0 !important;
+    ion-list {
+      margin: 0;
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 48%;
+      }
+    }
+  }
+
+ion-list button {
+  &.register,
+  &.facebook,
+  &[type="submit"] {
+    width: 100%;
+    height: 55px;
+    font-size: 16px;
+    color: #fff;
+    line-height: 45px;
+    margin: 30px 0 25px;
+    border-radius: 4px;
+    text-transform: capitalize;
+  }
+
+  &[type="submit"] {
+    background: $cs-red;
+  }
+
+  &.register {
+    background: #b12a28;
+  }
+  &.facebook {
+    margin: 0;
+    background: #3B5998;
+  }
+}
+
+.social-wrapper {
+  margin: 0 16px;
+}
+
+@media (max-width: 1200px) {
+  .login-wrapper,
+  .forgot-password-wrapper {
+    position: static;
+    width: 100%;
+    min-height: initial;
+    border: none;
+    transform: none;
+
+    .logo-holder {
+      height: 165px;
+    }
+
+    .back-btn {
+      height: 50px;
+      display: initial;
+      margin: 0;
+    }
+
+    div.login-input-wrapper,
+    div.reset-input-wrapper {
+      padding: 10px 15px 0;
+      .list {
+        margin: 0;
+      }
+    }
+
+    .forgot-password {
+      margin: 0;
+    }
+
+    .button-wrapper button {
+      margin-bottom: 0 !important;
+    }
+
+    .subtext {
+      text-align: left;
+      margin: 0;
+    }
+
+  }
+
+  .social-wrapper {
+    ion-list {
+      margin: 0;
+    }
+  }
+
+  .forgot-password-wrapper {
+    ion-input {
+      margin-bottom: 18px;
+    }
+  }
+}

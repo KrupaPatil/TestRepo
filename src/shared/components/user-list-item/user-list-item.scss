@@ -1,0 +1,45 @@
+.user-item-list {
+  width: 500px;
+  margin: 20px auto;
+
+  .user-item-wrapper {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .info-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .info {
+      margin-left: 10px;
+      .name {
+        font-weight: 600;
+      }
+      .date {
+        font-size: 12px;
+        color: #A7A7A7;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .user-item-list {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: calc(100% - 145px);
+    margin: 75px auto 65px;
+    padding: 0 5%;
+  }
+}

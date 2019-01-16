@@ -1,0 +1,98 @@
+<div class="user-reviews-wrapper">
+  <div class="header">{{ reviewPost ? 'Post a Review' : 'User reviews' }}</div>
+  <div class="post" *ngFor="let post of reviews">
+    <div class="create-post-overlay" *ngIf="reviewPost" (click)="createPost(post)"></div>
+    <div class="post-header">
+      <div class="user-wrapper">
+        <img *ngIf="post.User.AvatarUrl" tappable
+             class="post-user-image custom"
+             [src]="post.User.AvatarUrl  | createSource"/>
+        <img *ngIf="!post.User.AvatarUrl" class="post-user-image" src="assets/images/user-image.png">
+        <div class="user-info">
+          <div class="name-wrapper">
+            <strong>{{post.User | userName}}</strong>
+            <span>reviewed</span>
+            <strong (click)="navigateToProduct(post)" class="title" tappable>{{' ' + post.CigarName}}</strong>
+          </div>
+          <div class="time-posted">{{ post.CreatedOn | date:'MMM d, y, HH:mm' }}</div>
+          <div class="place" *ngIf="!post.LocationModified && post.Location">
+            <i class="place-icon"></i>
+            {{ post.Location }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review" *ngIf="post.Rating">
+      <div class="rating">
+        <div class="overall">
+          <div>overall</div>
+          <span>{{post.Rating | number : '1.1-2'}}</span>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.Rating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="detailed">
+          <div class="single-rate">
+            <div>draw</div>
+            <rating-stars
+              [starColor]="'yellow'"
+              [rating]="post.DrawRating"
+              [size]="15"></rating-stars>
+          </div>
+          <div class="single-rate">
+            <div>appearance</div>
+            <rating-stars
+              [starColor]="'yellow'"
+              [rating]="post.AppearanceRating"
+              [size]="15"></rating-stars>
+          </div>
+          <div class="single-rate">
+            <div>burn</div>
+            <rating-stars
+              [starColor]="'yellow'"
+              [rating]="post.BurnRating"
+              [size]="15"></rating-stars>
+          </div>
+          <div class="single-rate">
+            <div>aroma</div>
+            <rating-stars
+              [starColor]="'yellow'"
+              [rating]="post.AromaRating"
+              [size]="15"></rating-stars>
+          </div>
+          <div class="single-rate">
+            <div>taste</div>
+            <rating-stars
+              [starColor]="'yellow'"
+              [rating]="post.TasteRating"
+              [size]="15"></rating-stars>
+          </div>
+        </div>
+      </div>
+      <div class="comment" *ngIf="post.Comment">{{post.Comment}}</div>
+    </div>
+
+    <div class="product-data social-post">
+      <div class="cigar-info-wrapper">
+        <cigar-brand-logo (click)="navigateToProduct(post)" [cigar]="post" tappable></cigar-brand-logo>
+        <div class="name-rating">
+          <div class="cigar-name" (click)="navigateToProduct(post)" tappable>{{ post.CigarName }}</div>
+        </div>
+      </div>
+      <div class="cigar-price-wrapper">
+        <div class="market-price-wrapper">
+          <div class="price-type">U.S. Retail</div>
+          <div class="per-cigar">
+            {{ [post.CigarPrices?.SinglePriceMin, post.CigarPrices?.SinglePriceMax] | priceRange }}
+          </div>
+          <div class="per-humidor">
+            {{ [post.CigarPrices?.BoxPriceMin, post.CigarPrices?.BoxPriceMax, post.MinBoxQty, post.MaxBoxQty] |
+            priceRange }}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

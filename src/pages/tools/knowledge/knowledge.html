@@ -1,0 +1,6 @@
+<div class="knowledge-wrapper">
+  <div class="page-name">Cigar 101</div>
+    <ion-list>
+      <ion-item *ngFor="let item of listItems" (tap)="goToListItem(item.ContentId)" tappable>{{item.Title}} <div class="arrow"></div></ion-item>
+    </ion-list>
+</div>

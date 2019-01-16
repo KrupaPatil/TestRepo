@@ -1,0 +1,42 @@
+.search-results-wrapper {
+  max-height: calc(100% - 145px);
+  overflow: auto;
+
+  p {
+    margin: 0 0 18px;
+    padding-bottom: 15px;
+    color: #A7A7A7;
+    font-size: 14px;
+    border-bottom: 1px solid #ECECEC;
+  }
+
+  .search-results {
+    div {
+      margin: 0 0 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #ECECEC;
+      font-size: 16px;
+      color: #000;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .search-results-wrapper {
+    p {
+      margin: 0 0 10px;
+      padding-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .search-results {
+      div {
+        margin: 0 0 10px;
+        padding-bottom: 10px;
+        font-size: 14px;
+      }
+    }
+  }
+
+}

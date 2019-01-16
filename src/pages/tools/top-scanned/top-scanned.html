@@ -1,0 +1,35 @@
+<div class="top-cigar-wrapper">
+  <div class="page-name">Top Scanned Cigars</div>
+  <div class="segment-wrapper">
+    <ion-segment [(ngModel)]="days" (ionChange)="getTopScannedCigars()">
+      <ion-segment-button value="">
+        All Time
+      </ion-segment-button>
+      <ion-segment-button value="7">
+        This Week
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment [(ngModel)]="strength" (ionChange)="getTopScannedCigars()">
+      <ion-segment-button value="">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="Mild">
+        Mild
+      </ion-segment-button>
+      <ion-segment-button value="Medium">
+        Medium
+      </ion-segment-button>
+      <ion-segment-button value="Full">
+        Full
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <cigar-info *ngFor="let cigar of topScanned"
+              [cigar]="cigar.CigarDetails"
+              (cigarClicked)="goToDetails(cigar.CigarDetails)">
+  </cigar-info>
+
+
+</div>

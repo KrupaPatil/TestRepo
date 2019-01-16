@@ -1,0 +1,27 @@
+<div class="user-item-list">
+  <div class="user-item-wrapper" *ngFor="let user of list; let i = index">
+    <div class="info-wrapper">
+      <ng-container *ngIf="follows">
+        <div class="avatar" (click)="navigateToUSerProfile(user)">
+          <img *ngIf="user.AvatarUrl" class="user-user-image custom" [src]="user.AvatarUrl | createSource" tappable/>
+          <img *ngIf="!user.AvatarUrl" class="user-user-image" src="assets/images/user-image.png">
+        </div>
+        <div class="info">
+          <div class="name">{{ user | userName }}</div>
+          <div class="date">Member since {{ user.RegisteredOn | date:'MMM d, y' }}</div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!follows">
+        <div class="avatar" (click)="navigateToUSerProfile(user.User)">
+          <img *ngIf="user.User.AvatarUrl" class="user-user-image custom" [src]="user.User.AvatarUrl | createSource"
+               tappable/>
+          <img *ngIf="!user.User.AvatarUrl" class="user-user-image" src="assets/images/user-image.png">
+        </div>
+        <div class="info">
+          <div class="name">{{ user.User | userName }}</div>
+          <div class="date">{{ user.CreatedOn | date:'MMM d, y, HH:mm' }}</div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

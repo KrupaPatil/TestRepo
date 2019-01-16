@@ -1,0 +1,69 @@
+<div class="custom-post-wrapper">
+  <p class="sub-heading">Create custom post:</p>
+  <form #form="ngForm" (ngSubmit)="submit(form)" novalidate>
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Location</ion-label>
+        <ion-input autocorrect="on"
+                   autocomplete="on"
+                   type="text"
+                   name="cigar-location"
+                   id="cigarLocation"
+                   [(ngModel)]="form.cigarLocation">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input
+          type="text"
+          name="cigar-title"
+          id="cigarTitle"
+          [(ngModel)]="customPost.cigarTitle"
+          #cigarTitle="ngModel"
+          required></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="form.submitted">
+        <p class="warning-message" *ngIf="cigarTitle.errors">Title field is required</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Text</ion-label>
+        <ion-input
+          type="text"
+          name="cigar-text"
+          id="cigarText"
+          [(ngModel)]="customPost.cigarText"
+          #cigarText="ngModel"
+          required></ion-input>
+      </ion-item>
+      <div class="warning-wrapper" *ngIf="form.submitted && cigarText.invalid">
+        <p class="warning-message" *ngIf="cigarText.errors">Text field is required</p>
+      </div>
+
+      <ion-item
+        class="cigar-preview"
+        [ngStyle]="{
+        'background-image': setBackgroundImageUrl(),
+        'height': setBackgroundImageHeight()}">
+        <ion-input
+          type="text"
+          name="test"
+          id="userImageUrl"
+          [(ngModel)]="customPost.userImageUrl"
+          #userImageUrl="ngModel"
+          required></ion-input>
+      </ion-item>
+      <ion-item class="set-image" (click)="takePicture()" tappable>Upload Image</ion-item>
+      <div class="warning-wrapper" *ngIf="form.submitted && userImageUrl.invalid">
+        <p class="warning-message" *ngIf="userImageUrl.errors">Image is required</p>
+      </div>
+
+      <button class="save" type="submit" ion-item>
+        Publish to Social Feed
+      </button>
+
+    </ion-list>
+  </form>
+</div>

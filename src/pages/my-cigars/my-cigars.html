@@ -1,0 +1,66 @@
+<div class="cigar-outer-wrapper">
+  <div class="cigars-container">
+    <div class="cigar-list-wrapper" [ngClass]="{'shrink': showCigarDetails}">
+      <div class="tab-wrapper">
+        <ion-segment [(ngModel)]="list">
+          <ion-segment-button
+            *ngFor="let key of segmentKeys"
+            [value]="key" (ionSelect)="changeResource(key)">
+            {{ segments[key]['name'] }} <span *ngIf="cigarsSummary[key]" class="total-list-number">({{cigarsSummary[key]}})</span>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div class="my-cigars">
+        <div
+          *ngFor="let key of segmentKeys"
+          [hidden]="list != key">
+          <div class="sort-buttons-wrapper">
+            <button [ngClass]="{'active': segments[key]['sort'] == dateSortField}" ion-button (click)="sort(dateSortField)">Date
+              <ion-icon *ngIf="segments[list]['sort'] == dateSortField && !segments[list]['ascending']" name="arrow-round-up"></ion-icon>
+              <ion-icon *ngIf="segments[list]['sort'] == dateSortField && segments[list]['ascending']" name="arrow-round-down"></ion-icon>
+            </button>
+            <button [ngClass]="{'active': segments[key]['sort'] == nameSortField}" ion-button (click)="sort(nameSortField)">Name
+              <ion-icon *ngIf="segments[list]['sort'] == nameSortField && !segments[list]['ascending']" name="arrow-round-up"></ion-icon>
+              <ion-icon *ngIf="segments[list]['sort'] == nameSortField && segments[list]['ascending']" name="arrow-round-down"></ion-icon>
+            </button>
+            <button [ngClass]="{'active': segments[key]['sort'] == ratingSortField}" ion-button (click)="sort(ratingSortField)">Avg Rating
+              <ion-icon *ngIf="segments[list]['sort'] == ratingSortField && segments[list]['ascending']" name="arrow-round-up"></ion-icon>
+              <ion-icon *ngIf="segments[list]['sort'] == ratingSortField && !segments[list]['ascending']" name="arrow-round-down"></ion-icon>
+            </button>
+            <button [ngClass]="{'active': segments[key]['sort'] == myRatingSortField}" ion-button (click)="sort(myRatingSortField)">My Rating
+              <ion-icon *ngIf="segments[list]['sort'] == myRatingSortField && segments[list]['ascending']" name="arrow-round-up"></ion-icon>
+              <ion-icon *ngIf="segments[list]['sort'] == myRatingSortField && !segments[list]['ascending']" name="arrow-round-down"></ion-icon>
+            </button>
+          </div>
+          <ion-list>
+            <cigar-info *ngFor="let cigar of segments[key]['models']"
+                        [cigar]="cigar.Product"
+                        [date]="cigar.Date"
+                        [customPrice]="cigar.Price"
+                        [selected]="cigar.Id == idOfCurrentCigarViewed"
+                        [actions]="true"
+                        tappable
+                        (cigarClicked)="cigar.Product.IsCustom ? goToCustomCigar(cigar.Id || cigar._Id, segments[key]['list']) : toggleDetails(cigar.Id || cigar._Id, segments[key]['list'])"
+                        (addClicked)="addTo(cigar)"
+                        (deleteClicked)="remove(cigar)"
+                        (swipedLeft)="hideOptions(cigar.Product)">
+            </cigar-info>
+            <div
+              *ngIf="segments[key]['models'] && segments[key]['models'].length == segments[key]['total']"
+              class="load-more"
+              (click)="loadMore()" tappable>
+              Load More
+            </div>
+          </ion-list>
+        </div>
+      </div>
+    </div>
+    <div class="details-container">
+      <ion-content class="cigar-details-wrapper page-level page-level-1" pageLevel="1">
+        <router-outlet></router-outlet>
+      </ion-content>
+    </div>
+  </div>
+</div>
+<survey *ngIf="showSurvey" [survey]="survey[0]" [(showSurvey)]="showSurvey"></survey>
+

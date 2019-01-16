@@ -1,0 +1,126 @@
+.notifications-wrapper {
+  height: 100vh;
+  background: #f3f3f3;
+
+  .button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4px;
+  }
+
+  .delete-all {
+    background: $cs-red;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .notifications-list {
+    margin: 0;
+    background: #f3f3f3;
+  }
+
+  .list-md ion-item-sliding {
+    background: none;
+  }
+
+  .notification {
+    margin-bottom: 5px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    &.no-padding {
+      padding: 0;
+    }
+
+    ion-label.label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    img {
+      max-width: 60%;
+    }
+  }
+
+  .inner-wrapper {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 12px;
+  }
+
+  .text {
+    width: calc(100% - 70px);
+    white-space: initial;
+    font-size: 14px;
+    color: #000;
+    &.bold {
+      font-weight: 600;
+    }
+  }
+
+  .time {
+    width: 75px;
+    white-space: initial;
+    text-align: right;
+    font-size: 12px;
+    color: #a7a7a7;
+    text-transform: lowercase;
+  }
+
+  ion-item-options {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    .button {
+      background: $cs-red;
+      font-size: 14px;
+      color: #fff;
+      &:hover {
+        background: $cs-red;
+      }
+    }
+  }
+
+  ion-item.cigar {
+    margin: 0;
+    border-bottom: 0;
+    border-top: 1px solid #ddd;
+  }
+
+  .no-notifications {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.toast-button.button {
+  padding: 1.5rem;
+  font-size: 1.4rem;
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+  .notifications-wrapper {
+    margin: 65px 0 20px;
+
+    ion-list {
+      padding-bottom: 60px;
+    }
+
+    .button-wrapper {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .notifications-wrapper {
+    .time {
+      font-size: 11px;
+    }
+  }
+}

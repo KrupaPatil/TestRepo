@@ -1,0 +1,28 @@
+<div class="survey-wrapper">
+  <div>
+    <div class="title">{{survey.Title}}</div>
+  </div>
+  <div>
+    <div class="box-wrapper">
+      <ng-container *ngFor="let response of survey.Responses">
+        <div class="box good" *ngIf="response.Label == 'Good'" (click)="goToAppRating(response)"
+             tappable>
+          <div class="icon"></div>
+          <p>{{response.Label}}</p>
+        </div>
+        <div class="box bad" *ngIf="response.Label == 'Bad'" (click)="goToFeedback(response)"
+             tappable>
+          <div class="icon"></div>
+          <p>{{response.Label}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <ng-container *ngFor="let response of survey.Responses">
+      <div class="dont-ask" *ngIf="response.Label == helperLabel"
+           (click)="dontAskAgain(response)"
+           tappable>
+        {{response.Label}}
+      </div>
+    </ng-container>
+  </div>
+</div>

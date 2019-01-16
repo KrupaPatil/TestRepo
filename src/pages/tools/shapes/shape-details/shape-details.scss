@@ -1,0 +1,21 @@
+.shape-details-wrapper {
+  margin: 75px 10px 0;
+  text-align: center;
+
+  h1 {
+    margin: 0 0 15px;
+    font-size: 25px;
+    color: $cs-red;
+  }
+}
+
+@media (max-width: 1200px) {
+  .shape-details-wrapper {
+    text-align: left;
+
+    h1 {
+      font-size: 18px;
+    }
+  }
+
+}

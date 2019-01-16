@@ -1,0 +1,107 @@
+<div class="cigar-info-container">
+  <ion-item
+    class="cigar"
+    [ngClass]="{'selected': selected, 'show-options': cigar.ShowOptions, 'product-post': productPost}"
+    tappable
+    (tap)="cigarClicked.emit(cigar)"
+    (touchstart)="swipe($event, 'start', cigar)"
+    (mousedown)="swipe($event, 'start', cigar)"
+    (touchend)="swipe($event, 'end', cigar)"
+    (mouseup)="swipe($event, 'end', cigar)">
+    <div class="product-data">
+      <div class="cigar-info-wrapper">
+        <cigar-brand-logo [cigar]="cigar"></cigar-brand-logo>
+        <div class="name-rating">
+          <div class="cigar-name">{{ cigar.Name }}</div>
+
+          <div class="rating" *ngIf="!productPost && (!cigar.IsCustom && !topRatedCigar)">
+            <rating-stars
+              [rating]="cigar.RatingSummary?.AverageRating"
+              [size]="15"></rating-stars>
+            <div class="value">{{ cigar.RatingSummary?.AverageRating }} ({{ cigar.RatingSummary?.RatingCount }})</div>
+          </div>
+
+          <div class="rating" *ngIf="!productPost && (!cigar.IsCustom && topRatedCigar)">
+            <rating-stars
+              [rating]="topRatedCigar.Rating.AverageRating"
+              [size]="15"></rating-stars>
+            <div class="value">{{ topRatedCigar.Rating.AverageRating }} ({{topRatedCigar.Rating.RatingCount }})</div>
+          </div>
+
+          <div class="rating" *ngIf="productPost && cigar.Rating">
+            <rating-stars
+              [rating]="cigar.Rating?.AverageRating"
+              [size]="15"></rating-stars>
+            <div class="value">{{ cigar.Rating?.AverageRating }} ({{cigar.Rating?.RatingCount }})</div>
+          </div>
+
+          <div class="description" *ngIf="cigar.IsCustom">
+            {{ cigar.Description }}
+          </div>
+        </div>
+      </div>
+      <div class="cigar-price-wrapper" *ngIf="!productPost && !cigar.IsCustom">
+        <div class="market-price-wrapper" [ngClass]="{'price-divider': cigar.Prices?.showPartnerPrices()}">
+          <div class="price-type">U.S. Retail</div>
+          <div class="per-cigar">
+            {{ [cigar.Prices?.SinglePriceMin, cigar.Prices?.SinglePriceMax] | priceRange }}
+          </div>
+          <div class="per-humidor">
+            {{ [cigar.Prices?.BoxPriceMin, cigar.Prices?.BoxPriceMax, cigar.MinBoxQty, cigar.MaxBoxQty] | priceRange }}
+          </div>
+        </div>
+        <div class="partner-price-wrapper" *ngIf="cigar.Prices?.showPartnerPrices()">
+          <div class="price-type">Partner price</div>
+          <div class="per-cigar">
+            {{ [cigar.PartnerPrices?.SinglePriceMin, cigar.PartnerPrices?.SinglePriceMax] | priceRange }}
+          </div>
+          <div class="per-humidor">
+            {{ [cigar.PartnerPrices?.BoxPriceMin, cigar.PartnerPrices?.BoxPriceMax, cigar.MinBoxQty, cigar.MaxBoxQty] |
+            priceRange }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-info-wrapper">
+      <div *ngIf="date" class="user-info">Added on {{date | date}}
+        <span *ngIf="customPrice">, paid ${{customPrice}}</span>
+        <span *ngIf="cigar.MyCigarFeatures && cigar.MyCigarFeatures.SmokingTime">, smoked in {{cigar.MyCigarFeatures.SmokingTime}}min</span>
+      </div>
+      <div class="rating" *ngIf="!productPost && (cigar.MyRating?.Rating && !cigar.IsCustom)">
+        <div>Rated</div>
+        <rating-stars
+          [starColor]="'yellow'"
+          [rating]="cigar.MyRating.Rating"
+          [size]="15"></rating-stars>
+        <div class="value">on {{cigar.MyRating.CreatedOn | date}}</div>
+      </div>
+
+      <div class="rating" *ngIf="productPost && cigar.UserRating.Rating">
+        <div>Rated</div>
+        <rating-stars
+          [starColor]="'yellow'"
+          [rating]="cigar.UserRating.Rating"
+          [size]="15"></rating-stars>
+      </div>
+
+      <div *ngIf="cigar.MyRating && !cigar.IsCustom">
+        <div class="user-info" *ngIf="cigar.MyRating.Comment">
+          Comment: {{cigar.MyRating.Comment}}
+        </div>
+      </div>
+      <div class="user-info" *ngIf="cigar.MyNote && !cigar.IsCustom">
+        Note: {{cigar.MyNote.Note}}
+      </div>
+    </div>
+  </ion-item>
+
+  <div class="button-wrapper">
+    <button ion-button class="add" (click)="addClicked.emit(cigar)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <button ion-button class="delete" (click)="deleteClicked.emit(cigar)">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+  </div>
+</div>

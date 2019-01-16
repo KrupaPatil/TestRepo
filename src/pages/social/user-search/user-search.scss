@@ -1,0 +1,40 @@
+div.user-search-wrapper {
+  width: auto;
+  height: 100%;
+  margin: 80px 50px 0;
+  overflow: auto;
+  background: #fff;
+
+  .user-item-list {
+    height: calc(100vh - 150px);
+    margin: 0;
+    overflow: scroll;
+  }
+
+  .search-input {
+    margin-bottom: 0;
+  }
+
+  ion-spinner {
+    margin: 0 auto;
+  }
+
+  div.results-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 70px);
+  }
+}
+
+@media (max-width: 1200px) {
+  div.user-search-wrapper {
+    margin: 80px 5px 0;
+
+    .user-item-list {
+      height: calc(100vh - 211px);
+      margin: 0;
+      overflow: scroll;
+    }
+  }
+}
+

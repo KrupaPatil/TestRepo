@@ -1,0 +1,22 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 30.434 28.944" enable-background="new 0 0 30.434 28.944" xml:space="preserve">
+<g>
+<defs>
+  <polygon id="SVGID_1_" points="15.217,24 5.812,28.944 7.608,18.472 0,11.056 10.515,9.528 15.217,0 19.919,9.528 30.434,11.056
+        22.825,18.472 24.621,28.944"/>
+</defs>
+<clipPath id="SVGID_2_">
+  <use xlink:href="#SVGID_1_"  overflow="visible"/>
+</clipPath>
+<g clip-path="url(#SVGID_2_)">
+  <defs>
+    <rect id="SVGID_3_" x="-362.783" y="-390" width="550" height="1334"/>
+  </defs>
+  <clipPath id="SVGID_4_">
+    <use xlink:href="#SVGID_3_"  overflow="visible"/>
+  </clipPath>
+  <polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#DBA6A5" stroke-width="4" stroke-miterlimit="10" points="15.217,24
+  5.812,28.944 7.608,18.472 0,11.056 10.515,9.528 15.217,0 19.919,9.528 30.434,11.056 22.825,18.472 24.621,28.944"/>
+</g>
+</g>
+  </svg>

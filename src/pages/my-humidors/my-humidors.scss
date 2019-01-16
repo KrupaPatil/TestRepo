@@ -1,0 +1,555 @@
+.total-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  border-bottom: 2px solid #ececec;
+  padding: 3px 10px;
+  font-size: 14px;
+  color: #666;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    *:first-child {
+      margin-right: 10px;
+    }
+  }
+
+  .icon-humidor {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+    background: url(../assets/images/cigar-info-icons.svg) no-repeat;
+    background-size: 20px;
+    background-position-y: -74px;
+  }
+
+  .icon-cigar {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+    background: url(../assets/images/cigar-info-icons.svg) no-repeat;
+    background-size: 20px;
+    background-position-y: 2px;
+  }
+
+  ion-icon {
+    color: #d7a7a5;
+  }
+}
+
+.humidor-outer-wrapper {
+  height: calc(100vh - 56px);
+  padding-bottom: 20px;
+  overflow: auto;
+
+  .item-wrapper {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .page-name {
+    margin: 50px 0 120px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
+
+  ion-content.page-level-1 {
+    &.show {
+      position: absolute;
+      .page-level-2 {
+        position: relative;
+      }
+    }
+  }
+
+  .humidor-list-wrapper {
+    width: 700px;
+    margin: 0 auto;
+    &.no-humidor {
+      text-align: center;
+    }
+  }
+
+  .humidor-list-wrapper > ion-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .humidor {
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+    text-decoration: initial;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    ion-label {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .humidor-name {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 8px 0 8px 20px;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  .humidor-header {
+    display: flex;
+    height: 277px;
+    flex-direction: row;
+    margin-bottom: 1px;
+  }
+
+  .humidor-measurements {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 15px;
+    color: #fff;
+    cursor: initial;
+    background: #000000;
+    background: -moz-linear-gradient(top, #000000 0%, #4095ed 100%);
+    background: -webkit-linear-gradient(top, #000000 0%, #4095ed 100%);
+    background: linear-gradient(to bottom, #000000 0%, #4095ed 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#4095ed', GradientType=0);
+    cursor: pointer;
+    &.offline {
+      background: #000000;
+      background: -moz-linear-gradient(top, #000000 0%, #8e8e8e 100%);
+      background: -webkit-linear-gradient(top, #000000 0%, #8e8e8e 100%);
+      background: linear-gradient(to bottom, #000000 0%, #8e8e8e 100%);
+    }
+  }
+
+  .warning {
+    font-size: 30px;
+  }
+
+  .humidity {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: center;
+
+    p {
+      color: #fff;
+      white-space: normal;
+    }
+
+    .percentage {
+      position: relative;
+      right: -6px;
+      height: 108px;
+      line-height: 104px;
+      margin-bottom: 0;
+      font-size: 147px;
+      font-family: 'Gotham-Thin';
+    }
+  }
+
+  .drop-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    span {
+      font-size: 58px;
+      font-family: 'Gotham-Thin';
+    }
+  }
+
+  .drop-image {
+    width: 85%;
+  }
+
+  .bottom-info-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
+    &.no-battery {
+      justify-content: flex-end;
+    }
+  }
+
+  .temp-time-wrapper {
+    position: relative;
+    bottom: -9px;
+  }
+
+  .temperature {
+    height: 60px;
+    line-height: 60px;
+    text-align: right;
+    font-size: 60px;
+    font-family: 'Gotham-Thin';
+  }
+
+  .time-stamp {
+    p {
+      font-size: 18px;
+      text-align: right;
+      font-family: 'Gotham-Light';
+      color: #fff;
+    }
+  }
+
+  .coming-soon {
+    text-transform: uppercase;
+    cursor: pointer;
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .battery {
+    position: relative;
+    width: 25px;
+    height: 43px;
+    border-radius: 4px;
+    background: #fff;
+    &:after {
+      content: '';
+      right: -6px;
+      top: -4px;
+      display: block;
+      height: 4px;
+      width: 12px;
+      position: relative;
+      background: #fff;
+    }
+
+    &.battery-low {
+      background: $cs-red;
+      &:after {
+        background: $cs-red;
+      }
+    }
+  }
+
+  .bar-holder {
+    position: absolute;
+    display: flex;
+    top: 3px;
+    right: 3px;
+    width: 19px;
+    height: 37px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #3376bb;
+    background: -moz-linear-gradient(top, #3376bb 0%, #3b88d9 100%);
+    background: -webkit-linear-gradient(top, #3376bb 0%, #3b88d9 100%);
+    background: linear-gradient(to bottom, #3376bb 0%, #3b88d9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3376bb', endColorstr='#3b88d9', GradientType=0);
+  }
+
+  .line-holder {
+    position: relative;
+    left: 50%;
+    width: 79%;
+    height: 100%;
+    margin-top: auto;
+    border-radius: 4px;
+    transform: translateX(-48%) rotate(180deg);
+    overflow: hidden;
+    &.battery-low {
+      .block {
+        background: $cs-red;
+      }
+    }
+  }
+
+  .block {
+    height: 8px;
+    margin: 1px 0;
+    background: #fff;
+  }
+
+  .cigar-image-wrapper {
+    display: flex;
+    width: 60%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  .image-wrap {
+    height: 50%;
+    width: 33.3%;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    &.no-image {
+      display: none;
+    }
+  }
+
+  .cigar-image, .no-image {
+    height: 100%;
+    background-size: 220%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .no-image {
+    background-image: url("../assets/images/humidor-details-cigar.svg");
+    background-size: 50%;
+  }
+
+  .humidor-info {
+    position: relative;
+    width: 100%;
+    padding: 3px 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #666;
+
+    [name='logo-usd'] {
+      width: 13px;
+      margin-right: 10px;
+      color: $cs-red;
+    }
+  }
+
+  .info-wrapper {
+    display: flex;
+    align-items: center;
+
+    &.time-dates ion-icon {
+      width: 12px;
+      height: 18px;
+      margin-right: 10px;
+      text-align: center;
+      color: $cs-red;
+    }
+  }
+
+  .price,
+  .created {
+    padding: 3px 0;
+  }
+
+  .added-removed-info {
+    margin-left: 22px;
+  }
+
+  button.edit {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    font-size: 15px;
+    color: $cs-red;
+  }
+
+  button.create {
+    width: 250px;
+    height: 50px;
+    padding: 0 12px 0 30px;
+    margin: 10px 0 0;
+    background-color: $cs-red;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: $cs-red;
+    }
+
+    &:before {
+      position: absolute;
+      left: 18px;
+      top: 13px;
+      font-family: "Ionicons";
+      content: "\f273";
+      font-size: 24px;
+    }
+  }
+}
+
+.cigar-details-wrapper.humidors-tab {
+  position: absolute;
+  height: auto;
+  overflow: auto;
+
+}
+
+@media (max-width: 1200px) {
+  .total-info {
+    margin-top: 60px;
+    justify-content: space-between;
+  }
+
+  .humidor-outer-wrapper {
+    height: calc(100vh - 176px);
+    margin: 0 10px;
+    padding-top: 15px;
+
+    .humidor-measurements {
+      padding: 7px;
+    }
+
+    .page-name {
+      display: none;
+    }
+
+    .humidor-list-wrapper {
+      width: 450px;
+      margin: auto;
+    }
+
+    .humidor-header {
+      height: 143px;
+    }
+
+    button.create {
+      width: 100%;
+      height: 45px;
+      padding: 0 12px;
+
+      &:before {
+        left: 12px;
+        top: 9px;
+      }
+    }
+
+    button.edit {
+      top: -47px;
+    }
+
+    .temp-time-wrapper {
+      position: relative;
+      bottom: 0;
+    }
+
+
+    .temperature {
+      height: 24px;
+      line-height: 20px;
+      font-size: 30px;
+    }
+
+    .humidity {
+      margin-bottom: 0;
+      .percentage {
+        right: -6px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 77px;
+      }
+    }
+
+    .drop-image {
+      width: 22px;
+    }
+
+    .drop-wrapper {
+      span {
+        font-size: 30px;
+      }
+    }
+
+    .time-stamp {
+      p {
+        font-size: 11px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .battery {
+      width: 18px;
+      height: 29px;
+      &:after {
+        right: -5px;
+        top: -2px;
+        height: 2px;
+        width: 8px;
+      }
+    }
+
+    .line-holder {
+      width: 75%;
+    }
+
+    .bar-holder {
+      top: 2px;
+      right: 2px;
+      width: 14px;
+      height: 25px;
+    }
+
+    .block {
+      height: 5px;
+      &:first-child {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+      &:last-child {
+
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+      }
+    }
+
+    .label-ios {
+      .line-holder {
+        transform: translateX(-50%) rotate(180deg);
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .humidor-outer-wrapper {
+    .humidor-list-wrapper {
+      width: auto;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .humidor-outer-wrapper {
+    .humidity .percentage {
+      right: -3px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 60px;
+    }
+
+    .drop-wrapper span {
+      font-size: 26px;
+    }
+
+    .drop-image {
+      width: 47%;
+    }
+
+    .temperature {
+      font-size: 29px;
+    }
+
+    .time-stamp p {
+      font-size: 8px;
+    }
+  }
+}

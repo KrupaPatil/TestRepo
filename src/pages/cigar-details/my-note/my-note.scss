@@ -1,0 +1,50 @@
+.my-note-wrapper {
+  margin: 100px auto 0;
+
+  .page-name {
+    margin: 50px 0 120px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
+
+  ion-textarea {
+    height: 200px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #969696;
+    color: #000;
+
+    textarea {
+      height: calc(100% - 26px);
+    }
+  }
+
+  ion-label {
+    margin: 0;
+  }
+
+  ion-textarea textarea::placeholder {
+    color: #cecece;
+  }
+
+  ion-textarea.ng-invalid.ng-dirty, ion-textarea.ng-invalid.ng-touched {
+    border-bottom-color: #f53d3d;
+  }
+}
+
+@media (max-width: 1200px) {
+  .my-note-wrapper {
+    width: 85%;
+    margin: 75px auto 0;
+
+    .page-name {
+      display: none;
+    }
+
+    ion-textarea {
+      height: 160px;
+      margin-bottom: 0;
+    }
+
+  }
+}

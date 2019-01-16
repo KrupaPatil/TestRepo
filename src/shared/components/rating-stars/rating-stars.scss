@@ -1,0 +1,27 @@
+rating-stars {
+  display: flex;
+}
+
+.star-wrapper {
+  position: relative;
+  display: flex;
+  margin-right: 1px;
+  cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.inner-star,
+.outer-star{
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.inner-star {
+  background-size: cover;
+  background-repeat: no-repeat;
+}

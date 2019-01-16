@@ -1,0 +1,55 @@
+.place-wrapper {
+
+  .info-wrapper {
+    margin: 20px 0 0 20px;
+  }
+
+  a.location {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .location-wrapper,
+  .distance-wrapper,
+  .rating-wrapper,
+  .call-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    ion-icon {
+      width: 25px;
+      margin-right: 20px;
+      font-size: 25px;
+      color: $cs-red;
+      opacity: 0.5;
+    }
+
+    div {
+      line-height: 20px;
+      font-size: 14px;
+    }
+
+  }
+  .call-wrapper {
+    padding: 0;
+    background: transparent;
+    text-align: left;
+  }
+
+  .rating-wrapper {
+    span {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .place-wrapper {
+    margin-top: 57px;
+    margin-bottom: 70px;
+    agm-map {
+      height: 250px;
+    }
+  }
+}

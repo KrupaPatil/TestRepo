@@ -1,0 +1,80 @@
+<div class="login-wrapper">
+  <div>
+    <button class="back-btn" ion-button backLink icon-only>
+      <ion-icon name='arrow-back'></ion-icon>
+    </button>
+  </div>
+
+  <div>
+    <div class="logo-holder">
+      <div class="logo"></div>
+    </div>
+    <ion-segment class="login-tabs" [(ngModel)]="type">
+      <ion-segment-button value="cigar-scanner">
+        Cigar Scanner Account
+      </ion-segment-button>
+      <ion-segment-button value="neptune-cigar">
+        Neptune Cigar Account
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="login-input-wrapper" [ngSwitch]="type" padding>
+    <ion-list *ngSwitchCase="'cigar-scanner'">
+      <form (ngSubmit)="submit(false, false)" novalidate>
+        <ion-item>
+          <ion-input
+            type="email"
+            placeholder="Email"
+            name="email"
+            [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="password"
+            name="password"
+            placeholder="Password"
+            [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <div class="forgot-password" routerLink="/forgot-password" tappable>forgot password?</div>
+        <div class="button-wrapper">
+          <button tappable type="submit">
+            Login
+          </button>
+          <button tappable routerLink="/register" class="register">
+            Register
+          </button>
+        </div>
+      </form>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'neptune-cigar'">
+      <form (ngSubmit)="submit(false, true)" novalidate>
+        <ion-item>
+          <ion-input
+            type="email"
+            placeholder="Email"
+            name="email"
+            [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="password"
+            placeholder="Password"
+            name="password"
+            [(ngModel)]="password"></ion-input>
+        </ion-item>
+
+        <button type="submit" ion-button>
+          Login
+        </button>
+      </form>
+    </ion-list>
+  </div>
+
+  <div class="social-wrapper">
+    <ion-list>
+      <button class="facebook" (click)="submit(true)"> Login with Facebook</button>
+    </ion-list>
+  </div>
+</div>

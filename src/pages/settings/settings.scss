@@ -1,0 +1,102 @@
+.settings-wrapper {
+  width: 60%;
+  margin: 50px auto 0;
+
+  .page-name {
+    margin: 50px 0 120px;
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
+
+  ion-title div{
+    margin: 15px 0;
+    padding: 0;
+    color: #000;
+  }
+
+  .label {
+    color: #000;
+  }
+
+  .save-btn {
+    width: 200px;
+    height: 55px;
+    font-size: 16px;
+    color: #fff;
+    line-height: 45px;
+    margin: 30px 0 25px;
+    background: $cs-red;
+    border-radius: 4px;
+    text-transform: capitalize;
+    &:hover {
+      color: #fff;
+      background: $cs-red;
+    }
+  }
+
+  .code-wrapper {
+    display: flex;
+  }
+
+  .generate-btn {
+    margin: 0 5px 0 0;
+    color: #fff;
+    background: $cs-red;
+    font-size: 16px;
+    line-height: 45px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    &:hover {
+      color: #fff;
+      background: $cs-red;
+    }
+  }
+
+  .code {
+    background: none;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .code-warning {
+    color: $cs-red;
+  }
+
+  ion-list[radio-group] ion-item {
+    width: 100px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .settings-wrapper {
+    width: auto;
+    margin: 70px 10px 0;
+
+    .page-name {
+      display: none;
+    }
+
+    .save-btn {
+      width: 100%;
+    }
+
+    ion-label {
+      margin: 0;
+      font-size: 14px;
+    }
+    button {
+      padding: 0;
+    }
+  }
+}
+
+@media (max-width: 377px) {
+  .settings-wrapper {
+
+    ion-label {
+      white-space: normal;
+      font-size: 13px;
+    }
+  }
+}

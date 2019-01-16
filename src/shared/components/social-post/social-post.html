@@ -1,0 +1,147 @@
+<div class="post">
+  <div class="post-header">
+    <div class="user-wrapper">
+      <img *ngIf="post.User.AvatarUrl" (tap)="navigateToUSerProfile(post.User)" tappable
+           class="post-user-image custom"
+           [src]="post.User.AvatarUrl  | createSource"/>
+      <img *ngIf="!post.User.AvatarUrl" (tap)="navigateToUSerProfile(post.User)" class="post-user-image" src="assets/images/user-image.png">
+      <div class="user-info">
+        <div class="name-wrapper">
+          <strong>{{ post.User | userName }}</strong>
+          <span *ngIf="post.Action">{{ post.Action }}</span>
+          <div *ngIf="post.CigarName" (tap)="navigateToProductClicked.emit(post)" class="title" tappable>{{' ' + post.CigarName}}</div>
+        </div>
+        <div class="time-posted">{{ post.CreatedOn | date:'MMM d, y, HH:mm a' }}</div>
+        <div class="place" *ngIf="!post.LocationModified && post.Location">
+          <i class="place-icon"></i>
+          {{ post.Location }}
+        </div>
+      </div>
+    </div>
+    <button *ngIf="isOwnedByLoggedInUser(post.User)" ion-button icon-only
+            (tap)="presentPopover($event, post.Id)">
+      <ion-icon name="more" ios="md-more"></ion-icon>
+    </button>
+  </div>
+
+  <div class="review" *ngIf="post.ReviewInfo.Rating">
+    <div class="rating">
+      <div class="overall">
+        <div>overall</div>
+        <span>{{post.ReviewInfo.Rating | number : '1.1-2'}}</span>
+        <rating-stars
+          [starColor]="'yellow'"
+          [rating]="post.ReviewInfo.Rating"
+          [size]="15"></rating-stars>
+      </div>
+      <div class="detailed" *ngIf="post.ReviewInfo.DrawRating">
+        <div class="single-rate">
+          <div>draw</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.DrawRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>appearance</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.AppearanceRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>burn</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.BurnRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>aroma</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.AromaRating"
+            [size]="15"></rating-stars>
+        </div>
+        <div class="single-rate">
+          <div>taste</div>
+          <rating-stars
+            [starColor]="'yellow'"
+            [rating]="post.ReviewInfo.TasteRating"
+            [size]="15"></rating-stars>
+        </div>
+      </div>
+    </div>
+    <div class="comment" *ngIf="post.ReviewInfo.Comment">{{post.ReviewInfo.Comment}}</div>
+  </div>
+  <div class="content">
+    <p class="text">{{ post.Text }}</p>
+    <img *ngIf="displayUserImage(post)" class="post-image" [src]="post.ImageUrl | createSource"/>
+  </div>
+
+  <!--remove *ngIf from the line below after the new post structure has been used by most of the users-->
+  <div class="product-data social-post" *ngIf="post.CigarRating && post.CigarName">
+    <div class="cigar-info-wrapper">
+      <cigar-brand-logo (tap)="navigateToProductClicked.emit(post)" [cigar]="post" tappable></cigar-brand-logo>
+      <div class="name-rating">
+        <div class="cigar-name" (tap)="navigateToProductClicked.emit(post)" tappable>{{ post.CigarName }}</div>
+        <div class="rating">
+          <rating-stars
+            [rating]="post.CigarRating?.AverageRating"
+            [size]="15"></rating-stars>
+          <div class="value">{{ post.CigarRating?.AverageRating }} ({{ post.CigarRating.RatingCount }})</div>
+        </div>
+      </div>
+    </div>
+    <div class="cigar-price-wrapper">
+      <div class="market-price-wrapper">
+        <div class="price-type">U.S. Retail</div>
+        <div class="per-cigar">
+          {{ [post.CigarPrices?.SinglePriceMin, post.CigarPrices?.SinglePriceMax] | priceRange }}
+        </div>
+        <div class="per-humidor">
+          {{ [post.CigarPrices?.BoxPriceMin, post.CigarPrices?.BoxPriceMax, post.MinBoxQty, post.MaxBoxQty] |
+          priceRange }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-section">
+    <div class="like-wrapper">
+      <i class="like-icon" [ngClass]="{'liked': post.Liked }" (tap)="toggleLike(post)" tappable></i>
+      <div class="like-number" (tap)="navigateToPostLikes(post)" [ngClass]="{'liked': post.Likes }" tappable>{{
+        post.Likes }}
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="comment" (tap)="navigateToComments(post)">{{ post.Comments }}</div>
+    <ng-container *ngIf="!isOwnedByLoggedInUser(post.User)">
+      <div class="separator"></div>
+      <div class="follow" (tap)="toggleFollowUser(post)">
+        <ion-icon name="contact" [ngClass]="{ 'following': post.User.Followed }"></ion-icon>
+        {{ post.User.Followed ? 'FOLLOWING' : 'FOLLOW' }}
+      </div>
+    </ng-container>
+  </div>
+  <div class="comments-wrapper" [ngClass]="{'hide': !post.Comments}">
+    <div class="comment-wrapper" *ngFor="let comment of post.TopComments">
+      <div class="info-wrapper">
+        <img *ngIf="comment.User.AvatarUrl" class="comment-user-image"
+             (tap)="navigateToUSerProfile(comment.User)"
+             [src]="comment.User.AvatarUrl | createSource"
+             tappable/>
+        <img *ngIf="!comment.User.AvatarUrl" class="comment-user-image"
+             (tap)="navigateToUSerProfile(comment.User)"
+             src="assets/images/user-image.png"
+             tappable>
+        <div class="info">
+          <div class="name">{{ comment.User | userName }}</div>
+          <div class="date">{{ comment.CreatedOn | date:'MMM d, y, HH:mm a' }}</div>
+        </div>
+      </div>
+      <div class="text" [innerHTML]="comment.Text | nl2br">
+      </div>
+    </div>
+  </div>
+</div>

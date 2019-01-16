@@ -1,0 +1,765 @@
+body, p, div {
+  font-family: Helvetica;
+}
+
+body {
+  ion-menu.mobile-menu ~ ion-content.content {
+    box-shadow: none;
+  }
+}
+
+ion-grid {
+  height: 100%;
+  padding: 0;
+}
+
+ion-row {
+  height: 100%;
+}
+
+ion-col.content-wrapper {
+  position: relative;
+  width: calc(100% - 300px);
+  padding: 0;
+}
+
+ion-col.menu-wrapper {
+  width: 300px;
+  flex: none;
+  padding: 0;
+  background: $cs-red;
+
+  ion-item {
+    padding-left: 48px;
+    color: #f5c7c6;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover, &.active {
+      background: #d13a37;
+      color: #fff;
+      .menu-icon {
+        opacity: 1;
+      }
+      &.search-button,
+      &.scan-button {
+        background: #711715;
+      }
+    }
+
+    .badge {
+      position: absolute;
+      top: 15px;
+      left: 65px;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      color: #000;
+      text-align: center;
+      font-size: 12px;
+      border-radius: 50%;
+      background: #fff;
+    }
+  }
+
+  .privacy-policy {
+    margin: 0 auto 5px;
+    font-size: 12px;
+    text-align: center;
+    color: #f6c7c7;
+    cursor: pointer;
+  }
+
+  .intro-icon,
+  .settings-icon {
+    width: 35px;
+    margin-right: 25px;
+    text-align: center;
+    font-size: 33px;
+  }
+
+  .desktop-auth-icon {
+    width: auto;
+    &:hover {
+      background: transparent;
+      p {
+        color: #fff;
+      }
+    }
+    p {
+      color: #f5c7c6;
+    }
+  }
+
+  .item-inner {
+    border-bottom: none !important;
+  }
+
+  .camera-wrapper {
+    padding-bottom: 15px;
+    background: rgb(177, 42, 40);
+    background: -moz-linear-gradient(left, rgba(177, 42, 40, 1) 0%, rgba(197, 53, 50, 1) 27%, rgba(197, 53, 50, 1) 74%, rgba(175, 41, 39, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(177, 42, 40, 1) 0%, rgba(197, 53, 50, 1) 27%, rgba(197, 53, 50, 1) 74%, rgba(175, 41, 39, 1) 100%);
+    background: linear-gradient(to right, rgba(177, 42, 40, 1) 0%, rgba(197, 53, 50, 1) 27%, rgba(197, 53, 50, 1) 74%, rgba(175, 41, 39, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b12a28', endColorstr='#af2927', GradientType=1);
+
+    img {
+      display: table;
+      margin: 0 auto;
+    }
+
+    .menu-logo {
+      padding-top: 18px;
+    }
+
+    .user-logo {
+      width: 80px;
+      height: 80px;
+      margin: 20px auto 15px;
+      border-radius: 50%;
+      &.empty {
+        background: #f9e2e2 url('../assets/images/menu-icons.svg') no-repeat;
+        background-position: center -600px;
+        background-size: 60%;
+      }
+    }
+
+    .user-name {
+      display: table;
+      margin: 0 auto 20px;
+      font-size: 18px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .scan-button, .search-button {
+      width: 258px;
+      margin: 0 auto;
+      padding: 0;
+      border: 1px solid #fff;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .scan-button {
+      margin-bottom: 15px;
+    }
+
+    ion-label,
+    ion-label {
+      margin: 0;
+    }
+
+    .inner-button-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      font-size: 18px;
+
+      ion-icon {
+        margin: 0 16px 0 0;
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+.mobile-menu {
+  ion-label {
+    display: flex;
+    flex-direction: row;
+
+    p {
+      color: $cs-red;
+    }
+  }
+
+  .user-logo {
+    display: table;
+    margin: 40px auto 10px;
+    &.empty {
+      background: #f9e2e2 url('../assets/images/mobile-menu-icons.svg') no-repeat;
+      background-position: center -676px;
+      background-size: 60%;
+    }
+  }
+
+  .user-name {
+    text-align: center;
+    font-size: 18px;
+    &.empty {
+      text-decoration: underline;
+      font-weight: 600;
+    }
+  }
+
+  ion-list {
+    margin: 40px 10px 0 40px;
+  }
+
+  .logout-menu-wrapper {
+    .mobile-menu-icon {
+      &.my-profile {
+        background-position: center -455px;
+      }
+      &.notifications {
+        background-position: center -513px;
+      }
+      &.link {
+        background-position: center -564px;
+      }
+    }
+    p {
+      color: #969696;
+    }
+  }
+
+  .settings-icon,
+  .intro-icon {
+    width: 35px;
+    margin-right: 25px;
+    text-align: center;
+    font-size: 33px;
+    color: $cs-red;
+  }
+
+  .mobile-menu-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 25px;
+    background: url('../assets/images/mobile-menu-icons.svg') no-repeat;
+    background-size: 80%;
+    &.log-in {
+      background-position: center 4px;
+    }
+    &.my-profile {
+      background-position: center 6px;
+    }
+    &.notifications {
+      position: relative;
+      background-position: center -53px;
+
+      .number-wrapper {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: -4px;
+        width: 15px;
+        height: 15px;
+        border: 3px solid #fff;
+        text-align: center;
+        font-size: 10px;
+        line-height: 15px;
+        color: #fff;
+        border-radius: 50%;
+        background: #a71f1c;
+        box-sizing: content-box;
+        &.new-notifications {
+          display: block;
+        }
+      }
+    }
+    &.link {
+      background-position: center -110px;
+    }
+    &.feedback {
+      background-position: center -170px;
+    }
+    &.settings {
+      background-position: center -170px;
+    }
+    &.about {
+      background-position: center -227px;
+    }
+    &.rate {
+      background-position: center -283px;
+    }
+    &.log-out {
+      background-position: center -340px;
+    }
+  }
+
+  .log-out-wrapper {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.menu-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 25px;
+  background: url('../assets/images/menu-icons.svg') no-repeat;
+  opacity: 0.7;
+
+  &.my-profile {
+    background-position: center -302px;
+  }
+  &.camera {
+    margin-right: 15px;
+    background-position: center 1px;
+  }
+  &.search {
+    margin-right: 15px;
+    background-position: center -53px;
+  }
+  &.my-cigars {
+    margin-bottom: 0;
+    background-position: center -111px;
+  }
+  &.humidors {
+    background-position: center -250px;
+  }
+  &.share {
+    background-position: center -164px;
+  }
+  &.more {
+    background-position: center -207px;
+  }
+  &.log-out {
+    background-position: center -381px;
+  }
+}
+
+ion-label {
+  display: flex;
+  align-items: center;
+}
+
+ion-col {
+  padding: 0;
+  overflow: auto;
+}
+
+.back-btn {
+  position: relative;
+  display: inline-block;
+  margin-left: 50px;
+  font-size: 18px;
+  color: $cs-red;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    width: 10px;
+    position: absolute;
+    height: 10px;
+    top: 4px;
+    left: -16px;
+    border-left: 2px solid $cs-red;
+    border-bottom: 2px solid $cs-red;
+    transform: rotate(45deg);
+  }
+}
+
+@media (min-width: 1201px) {
+  .scroll-content {
+    overflow: hidden;
+  }
+
+  .my-note-wrapper,
+  .attribute-wrapper,
+  .reviews-wrapper,
+  .cigar-log-info,
+  .my-rating-wrapper,
+  .my-note-wrapper {
+    width: 80%;
+  }
+
+  my-cigars {
+    .my-note-wrapper,
+    .attribute-wrapper,
+    .reviews-wrapper,
+    .cigar-log-info,
+    .my-rating-wrapper,
+    .my-note-wrapper {
+      width: 90%;
+    }
+  }
+}
+
+.add-manually {
+  width: calc(100% - 260px);
+  display: flex;
+  padding-left: 36px;
+  align-items: center;
+  height: 100px;
+  margin: 5px auto;
+  border: 1px solid #ececec;
+  cursor: pointer;
+  &.search-style {
+    width: 100%;
+  }
+
+  ion-icon {
+    color: $cs-red;
+    font-size: 50px;
+  }
+
+  .inner-wrapper {
+    margin-left: 30px;
+  }
+
+  p {
+    margin: 5px;
+    font-size: 16px;
+    color: #A7A7A7;
+    &:last-child {
+      color: $cs-red;
+    }
+  }
+
+}
+
+@media (max-width: 1200px) {
+
+  div.tab-wrapper {
+    width: 100%;
+    ion-segment-button.segment-button {
+      height: 40px;
+      line-height: 40px;
+      border: none;
+      border-radius: 0;
+      background: #F3F3F3;
+      color: $cs-red;
+      font-size: 16px;
+      opacity: 1;
+      &.segment-activated {
+        border-bottom: 3px solid $cs-red;
+        background: #F3F3F3;
+        color: $cs-red;
+
+      }
+    }
+
+    ion-segment {
+      position: absolute;
+      top: 59px;
+      z-index: 2;
+    }
+  }
+
+  ion-list {
+    padding-bottom: 10px;
+  }
+
+  .layout-desktop-wrapper {
+    display: none;
+  }
+
+  .user-logo {
+    width: 80px;
+    height: 80px;
+    margin: 20px auto 15px;
+    border-radius: 50%;
+  }
+
+  ion-header ion-navbar.toolbar {
+    min-height: 59px;
+
+    .toolbar-background {
+      background: #fff;
+      border-color: #dfdfdf;
+    }
+
+    ion-item {
+      width: 55px;
+      height: 40px;
+      color: $cs-red;
+      flex-shrink: 0;
+    }
+
+    .hamburger-button {
+      width: 56px;
+      height: 50px;
+      margin: 0;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 60px;
+      width: 60px;
+      padding: 0;
+      background: url('../assets/images/icons-group.svg') no-repeat;
+      background-position: 17px 18px;
+      background-size: 25px;
+      z-index: 1;
+    }
+
+    button {
+      color: $cs-red;
+      &:hover {
+        color: $cs-red;
+      }
+
+      &[backlink], &.manual-back {
+        height: 50px;
+        width: 50px;
+        margin: 0;
+      }
+    }
+
+    .toggle-posts-button {
+      position: absolute;
+      right: 60px;
+      top: 0;
+      width: 90px;
+      height: 60px;
+      background: none;
+      font-size: 15px;
+      &:after {
+        position: absolute;
+        margin: 0 auto;
+        content: '';
+        top: 41px;
+        left: 0;
+        right: 0;
+        display: block;
+        height: 10px;
+        width: 10px;
+        border-bottom: 1px solid $cs-red;
+        border-right: 1px solid $cs-red;
+        transform: rotate(45deg);
+      }
+    }
+
+    .clear-notifications-button {
+      background: none;
+      font-size: 15px;
+    }
+
+    .delete-notifications {
+      background: #fff;
+      font-size: 15px;
+    }
+
+    &.toolbar-ios {
+      .clear-notifications-button {
+        position: absolute;
+        right: 0;
+        padding: 17px 5px;
+      }
+    }
+  }
+
+  ion-footer.footer {
+    ion-toolbar {
+      position: relative;
+      padding: 0;
+      &.toolbar:last-child {
+        padding-bottom: 0;
+      }
+    }
+
+    .camera {
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      z-index: 11;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #A71F1C;
+      opacity: 1;
+
+      &:hover {
+        background: #A71F1C;
+      }
+      .button-inner {
+        background: url('../assets/images/menu-icons.svg') no-repeat center 18px;
+        opacity: 0.8;
+      }
+    }
+
+    .toolbar-content {
+      height: 60px;
+
+      display: flex;
+      justify-content: space-between;
+      background: $cs-red;
+    }
+
+    button {
+      width: 74px;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      opacity: 0.7;
+      &.active {
+        opacity: 1;
+      }
+
+      &.camera-placeholder-wrapper {
+        width: 70px;
+        background: 0;
+      }
+
+      .button-inner {
+        flex-direction: column;
+        color: #fff;
+        font-size: 12px;
+      }
+
+      .link-name {
+        margin: 1px 2px 2px;
+        font-size: 11px;
+        text-transform: capitalize;
+      }
+
+      .menu-icon {
+        height: 40px;
+        width: 50px;
+        margin: 0;
+        background: url('../assets/images/menu-icons.svg') no-repeat;
+        opacity: 1;
+
+        &.my-cigars {
+          background-position: center -111px;
+        }
+        &.share {
+          background-position: center -164px;
+        }
+        &.camera-placeholder {
+          background: none;
+        }
+        &.humidors {
+          background-position: center -250px;
+        }
+        &.more {
+          background-position: center -207px;
+        }
+      }
+    }
+  }
+
+  .add-manually {
+    width: 100%;
+    background: #fff;
+
+    p {
+      font-size: 14px;
+    }
+
+    &.search-style {
+      height: 60px;
+    }
+  }
+}
+
+.cigar-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 9999999999;
+
+  .info-wrapper {
+    position: relative;
+    display: flex;
+    top: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: translateY(-85%);
+  }
+
+  img {
+    width: 300px;
+  }
+
+  .message {
+    color: #E6594E;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 340px) {
+  .mobile-menu .logout-menu-wrapper .mobile-menu-icon.link {
+    background-position: center -544px;
+  }
+}
+
+@media (max-height: 830px) {
+  ion-col.menu-wrapper .desktop-auth-icon {
+    position: static;
+  }
+}
+
+@media (max-height: 642px) {
+  .mobile-menu {
+    .log-out-wrapper {
+      position: static;
+    }
+    ion-label {
+      margin: 8px 0px;
+    }
+    ion-list {
+      margin: 20px 10px 0 40px;
+    }
+    .user-logo {
+      margin: 22px auto 10px;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .menu-icon.camera {
+    background-position: center 2px;
+  }
+
+  ion-col.content-wrapper {
+    height: 100vh;
+  }
+
+  .menu-wrapper {
+    height: 100%;
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .menu-icon.camera {
+    background-position: center 2px;
+  }
+
+  ion-col.content-wrapper {
+    height: 100vh;
+  }
+}
+
+@supports (-ms-ime-align:auto) {
+  .menu-icon.camera {
+    background-position: center 2px;
+  }
+
+  .menu-icon.search {
+    background-position: center -53px;
+  }
+
+  ion-col.content-wrapper {
+    height: 100vh;
+  }
+}
+
+.ios ion-footer .toolbar:last-child {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+

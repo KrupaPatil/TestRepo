@@ -1,0 +1,12 @@
+<div class="cigar-outer-wrapper">
+  <div class="cigars-container">
+    <div class="cigar-list-wrapper" [ngClass]="{'shrink': showCigarDetails}">
+      <cigar-search (resultClick)="onResultClick($event)" [searchJournal]="true"></cigar-search>
+    </div>
+    <div class="details-container">
+      <ion-content class="cigar-details-wrapper page-level page-level-1" pageLevel="1">
+        <router-outlet></router-outlet>
+      </ion-content>
+    </div>
+  </div>
+</div>

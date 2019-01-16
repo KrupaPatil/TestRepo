@@ -1,0 +1,67 @@
+<div class="migrate-account-page">
+  <div class="logo-holder">
+    <div class="logo"></div>
+  </div>
+
+  <div class="inner-wrapper">
+    <div class="info">
+      <h1>Welcome To Cigar Scanner V3!</h1>
+      <p>Please, Update Your Password to Start Using Cigar Scanner V3.<br />
+        You can keep your previous password.</p>
+    </div>
+    <form #form="ngForm"
+          (ngSubmit)="submit(form)"
+          novalidate>
+      <ion-list>
+        <ion-item [hidden]="!showEmailField">
+          <ion-input
+            type="{{ showEmailField ? 'email' : 'hidden' }}"
+            name="email"
+            placeholder="Email *"
+            [(ngModel)]="userData.Email"
+            #email="ngModel"
+            required></ion-input>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!email.valid && (email.touched || form.submitted)">
+          <p class="warning-message" *ngIf="email.errors?.required">Field is required</p>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="password"
+            name="password"
+            placeholder="Password *"
+            [(ngModel)]="userData.Password"
+            #password="ngModel"
+            required
+            [minlength]="6"></ion-input>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!password.valid && (password.touched || form.submitted)">
+          <p class="warning-message" *ngIf="password.errors?.required">Field is required</p>
+          <p class="warning-message" *ngIf="password.errors?.minlength">Minimum 6 characters</p>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="password"
+            name="confirm-password"
+            placeholder="Confirm Password *"
+            [(ngModel)]="userData.ConfirmPassword"
+            #confirmPassword="ngModel"
+            required
+            [equalTo]="password"></ion-input>
+        </ion-item>
+        <div class="warning-wrapper" *ngIf="!confirmPassword.valid && (confirmPassword.touched || form.submitted)">
+          <p class="warning-message" *ngIf="confirmPassword.errors?.required">Field is required</p>
+          <p class="warning-message" *ngIf="confirmPassword.errors?.equalTo">Passwords don't match</p>
+        </div>
+
+        <ion-item>
+          <button type="submit" ion-button>
+            Continue
+          </button>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+</div>
